@@ -40,6 +40,13 @@ a2RMapper.addWork<Action.IDeleteAction>(
     }
 )
 
+a2RMapper.addWork<Action.IToggleShownSpinnerAction>(
+    Action.TOGGLE_SHOWN_SPINNER,
+    (state, action) => {
+        state.shownLoading = !state.shownLoading;
+    }
+)
+
 export const TaskReducer: Redux.Reducer<ITaskList> = (state = initTaskList, action) => {
     return a2RMapper.execute(state, action);
 };

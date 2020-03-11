@@ -26,3 +26,8 @@ export const DELETE_TASK = UUID();
 export interface IDeleteAction extends Action {
     taskId: string;
 }
+
+export const TOGGLE_SHOWN_SPINNER = UUID();
+
+export interface IToggleShownSpinnerAction extends Action {
+}
