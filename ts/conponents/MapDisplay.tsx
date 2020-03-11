@@ -8,6 +8,7 @@ const Container = Styled.div`
     border-radius: 5px;
     border: solid ${$DAWN_LIGHT_GOLD} 1px;
     flex-grow: 1;
+    overflow: auto;
 `;
 // #endregion
 
