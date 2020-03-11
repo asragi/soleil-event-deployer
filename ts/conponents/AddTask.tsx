@@ -15,6 +15,11 @@ interface IProps {
     deadline: Date;
 }
 
+interface ILocalState {
+    taskName: string;
+    deadline: Date;
+}
+
 //#region styled
 const Container = Styled.div`
     align-items: center;
@@ -49,7 +54,15 @@ const AddButton = Styled.button`
 
 //#endregion
 
-export class AddTask extends React.Component<IProps, {}> {
+export class AddTask extends React.Component<IProps, ILocalState> {
+    public constructor(props: IProps) {
+        super(props);
+        this.state = {
+            deadline: props.deadline,
+            taskName: props.taskName,
+        };
+    }
+
     public render() {
         const date = Moment(this.props.deadline);
         const taskNameId = UUID();
@@ -58,8 +71,8 @@ export class AddTask extends React.Component<IProps, {}> {
             <Container>
                 <TaskNameBox>
                     <label htmlFor={taskNameId}>task name</label>
-                    <TextBox id={taskNameId} type="text" value={this.props.taskName}
-                        onChange={() => {/* ここは後で */ }} />
+                    <TextBox id={taskNameId} value={this.state.taskName}
+                        onChange={this.onChangeTaskName} />
                 </TaskNameBox>
                 <DeadlineBox>
                     <label htmlFor={deadlineId}>dead line</label>
@@ -70,11 +83,19 @@ export class AddTask extends React.Component<IProps, {}> {
     }
 
     private onClickAdd = (e: React.MouseEvent) => {
-        store.dispatch(createAddTaskAction(this.props.taskName, this.props.deadline));
+        console.log("ADD");
+        store.dispatch(createAddTaskAction(this.state.taskName, this.props.deadline));
         const m = Moment(new Date()).add(1, 'days');
         this.setState({
             deadline: m.toDate(),
             taskName: '',
+        });
+    }
+
+    private onChangeTaskName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value);
+        this.setState({
+            taskName: e.target.value,
         });
     }
 }
