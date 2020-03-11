@@ -1,11 +1,13 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { $DAWN_LIGHT_GOLD } from './FoundationStyles';
 
 // #region styled
 const Container = Styled.div`
     border-radius: 5px;
-    padding: 10px;
-    background-color: #FFFF00;
+    border: solid ${$DAWN_LIGHT_GOLD} 1px;
+    color: ${$DAWN_LIGHT_GOLD};
+    padding: 8px;
     display: flex;
 `;
 // #endregion
