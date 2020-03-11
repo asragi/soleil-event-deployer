@@ -84,7 +84,7 @@ export class AddTask extends React.Component<IProps, ILocalState> {
 
     private onClickAdd = (e: React.MouseEvent) => {
         console.log("ADD");
-        store.dispatch(createAddTaskAction(this.state.taskName, this.props.deadline));
+        store.dispatch(createAddTaskAction(this.state.taskName, this.props.deadline, store));
         const m = Moment(new Date()).add(1, 'days');
         this.setState({
             deadline: m.toDate(),
