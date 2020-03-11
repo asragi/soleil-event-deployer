@@ -6,7 +6,7 @@ import { CommandIcon } from './CommandIcon';
 const Container = Styled.div`
     display: flex;
     width: 100%;
-    height: 40px;
+    height: 36px;
     align-items: center;
 `;
 
