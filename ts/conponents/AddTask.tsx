@@ -76,6 +76,8 @@ export class AddTask extends React.Component<IProps, ILocalState> {
                 </TaskNameBox>
                 <DeadlineBox>
                     <label htmlFor={deadlineId}>dead line</label>
+                    <DatePicker selected={date} showTimeSelect={true}
+                        dateFormat="YYYY-MM-DD HH:mm" onChange={() => {/* ここは後で */ }} />
                 </DeadlineBox>
                 <AddButton onClick={this.onClickAdd}>+</AddButton>
             </Container>
