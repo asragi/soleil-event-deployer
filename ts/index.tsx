@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './conponents/FoundationStyles';
-import TaskList from './conponents/TaskList';
+import Home from './conponents/Home';
 import Store from './Store';
 
 const container = document.getElementById('contents');
@@ -11,7 +11,7 @@ const container = document.getElementById('contents');
 ReactDom.render(
     <div>
         <Provider store={Store}>
-            <TaskList />
+            <Home />
         </Provider>
         <ThemeProvider theme={{}}>
             <GlobalStyle theme="" />
