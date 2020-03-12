@@ -9,12 +9,16 @@ const BoxIcon = Styled.button`
     margin: 0 4px 4px 0;
     background-color: ${$DAWN_LIGHT_GOLD};
 `;
-
 // #endregion 
-export class CommandIcon extends React.Component<{}, {}> {
+
+interface IProps {
+    onClick?: () => void;
+}
+
+export class CommandIcon extends React.Component<IProps, {}> {
     public render() {
         return(
-            <BoxIcon />
+            <BoxIcon onClick={this.props.onClick}/>
         );
     }
 }

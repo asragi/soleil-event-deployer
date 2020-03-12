@@ -15,10 +15,14 @@ export class CommandList extends React.Component<{}, {}> {
     public render() {
         return (
             <Container>
-                <CommandIcon />
+                <CommandIcon onClick={this.LoadData}/>
                 <CommandIcon />
                 <CommandIcon />
             </Container>
         );
+    }
+
+    private LoadData = () => {
+
     }
 }
