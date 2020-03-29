@@ -25,3 +25,23 @@ export interface IEventBase {
     branchType?: string;
     Events?: IEventBase[];
 }
+
+export interface IMap {
+    eventObjs: IEventObject[];
+}
+
+export const initMap: IMap = {
+    eventObjs: [],
+};
+
+export const createEventObject = (
+    type: string,
+    name: string,
+    pos: IPos,
+): IEventObject => {
+    return {
+        type,
+        name,
+        pos
+    };
+};
