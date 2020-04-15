@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Styled from 'styled-components';
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
+import { IMap } from '../states/IEvent';
 import { IState } from '../IStore';
 
 //#region styled
@@ -20,8 +21,9 @@ const ShowContent = Styled.div`
 `;
 //#endregion
 
-class Home extends React.Component<{}, {}> {
+class Home extends React.Component<IMap, {}> {
     public render() {
+        {console.log(this.props.eventObjs);}
         return (
             <HomeContainer>
                 <ShowContent>

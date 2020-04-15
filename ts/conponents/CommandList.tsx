@@ -1,7 +1,8 @@
 import React from 'react'
 import Styled from 'styled-components'
 import { CommandIcon } from './CommandIcon';
-import { openFileDialog } from '../utils/FileDialog';
+import store from '../Store';
+import { createLoadEventsAction } from '../actions/EventActionCreator';
 
 // #region styled
 const Container = Styled.div`
@@ -24,7 +25,6 @@ export class CommandList extends React.Component<{}, {}> {
     }
 
     private LoadData = async () => {
-        const file = await openFileDialog([]);
-        console.log(file);
+        store.dispatch(createLoadEventsAction(store.dispatch));
     }
 }
