@@ -9,6 +9,7 @@ const Container = Styled.div`
     color: ${$DAWN_LIGHT_GOLD};
     padding: 8px;
     display: flex;
+    margin-bottom: 3px;
 `;
 // #endregion
 

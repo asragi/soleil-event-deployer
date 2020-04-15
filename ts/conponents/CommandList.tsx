@@ -17,14 +17,27 @@ export class CommandList extends React.Component<{}, {}> {
     public render() {
         return (
             <Container>
+                <CommandIcon onClick={this.Initialize}/>
                 <CommandIcon onClick={this.LoadData}/>
-                <CommandIcon />
-                <CommandIcon />
+                <CommandIcon onClick={this.SaveAsSameFile}/>
+                <CommandIcon onClick={this.SaveAsExec}/>
             </Container>
         );
     }
 
+    private Initialize = () => {
+
+    }
+
     private LoadData = async () => {
         store.dispatch(createLoadEventsAction(store.dispatch));
+    }
+
+    private SaveAsSameFile = () => {
+
+    }
+
+    private SaveAsExec = () => {
+
     }
 }
