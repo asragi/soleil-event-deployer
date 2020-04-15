@@ -1,9 +1,9 @@
 import { combineReducers, createStore } from 'redux';
-import { TaskReducer } from "./reducers/TaskReducer";
+import { EventReducer } from './reducers/EventReducer';
 import { IState } from './IStore';
 
 const combinedReducer = combineReducers<IState>({
-    taskList: TaskReducer,
+    map: EventReducer,
 });
 
 export const store = createStore(combinedReducer);

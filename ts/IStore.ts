@@ -1,5 +1,5 @@
-import { ITaskList } from './states/ITask';
+import { IMap } from './states/IEvent';
 
 export interface IState {
-    taskList: ITaskList;
+    map: IMap;
 }

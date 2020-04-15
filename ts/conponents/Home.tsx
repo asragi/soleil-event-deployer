@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Styled from 'styled-components';
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
+import { IState } from '../IStore';
 
 //#region styled
 const HomeContainer = Styled.div`
@@ -31,4 +33,8 @@ class Home extends React.Component<{}, {}> {
     }
 }
 
-export default Home;
+const stateToProps = (state: IState) => {
+    return state.map;
+}
+
+export default connect(stateToProps)(Home);

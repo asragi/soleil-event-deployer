@@ -1,12 +1,7 @@
 import Moment from 'moment';
 import React from 'react';
-import { connect } from 'react-redux';
 import Styled from 'styled-components';
-
-import { createLoadTasksAction } from '../actions/TaskActionCreators';
 import { ITaskList } from '../states/ITask';
-import store from '../Store';
-import { IState } from '../IStore';
 import { AddTask } from './AddTask';
 import { $COLOR_FOREGROUND_REVERSE, $COLOR_PRIMARY_0, $COLOR_PRIMARY_3 } from './FoundationStyles';
 import TaskRow from './TaskRow';
@@ -45,10 +40,6 @@ const TaskList = Styled.div`
 //#endregion
 
 class TodoList extends React.Component<ITaskList, {}> {
-    public componentDidMount() {
-        store.dispatch(createLoadTasksAction(store.dispatch));
-    }
-
     public render() {
         const { tasks } = this.props;
         const taskListElems = tasks.sort((a, b) => { // ...(b)
@@ -73,9 +64,3 @@ class TodoList extends React.Component<ITaskList, {}> {
         );
     }
 }
-
-const mapStateToProps = (state: IState): ITaskList => {
-    return state.taskList;
-}
-
-export default connect(mapStateToProps)(TodoList);
