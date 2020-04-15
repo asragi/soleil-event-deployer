@@ -14,6 +14,7 @@
     "@types/react-datepicker": "^1.1.7",
     "clone": "^2.1.2",
     "fs-extra": "^8.1.0",
+    "js-yaml": "^3.13.1",
     "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-datepicker": "^1.7.0",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/clone": "^0.1.30",
     "@types/fs-extra": "^8.1.0",
+    "@types/js-yaml": "^3.12.3",
     "@types/moment": "^2.13.0",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",

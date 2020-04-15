@@ -1,5 +1,5 @@
 import { Dispatch, Store } from "redux";
-import Moment from 'moment';
+import * as Yaml from 'js-yaml';
 import { IState } from '../IStore';
 import { ITask } from '../states/ITask';
 import { loadTask, saveState } from '../utils/TaskFileIF';
@@ -14,7 +14,11 @@ import {
     SHOW_TASKS,
     TOGGLE_COMPLETE_TASK,
     TOGGLE_SHOWN_SPINNER,
+    IShowEventAction,
+    SHOW_EVENTS,
 } from "./TaskActions";
+import { openFileDialog } from '../utils/FileDialog';
+import { IEventObject } from "../states/IEvent";
 
 export const createShowTaskAction = (tasks: ITask[]): IShowTaskAction => {
     return {
@@ -22,6 +26,13 @@ export const createShowTaskAction = (tasks: ITask[]): IShowTaskAction => {
         type: SHOW_TASKS,
     };
 };
+
+export const createShowMapAction = (eventObjs: IEventObject[]): IShowEventAction => {
+    return {
+        events: eventObjs,
+        type: SHOW_EVENTS
+    }
+}
 
 export const createAddTaskAction =
     (taskName: string, deadline: Date, store: Store<IState>): IToggleShownSpinnerAction => {
@@ -86,4 +97,27 @@ export const createLoadTasksAction = (dispatch: Dispatch): IToggleShownSpinnerAc
     return {
         type: TOGGLE_SHOWN_SPINNER,
     }
+}
+
+export const createLoadEventsAction =
+    (dispatch: Dispatch): IToggleShownSpinnerAction => {
+        (async () => {
+            const yamldata = await openFileDialog([]);
+            if (!yamldata) {
+                alert("Cannot load file!");
+                dispatch<IToggleShownSpinnerAction>({
+                    type: TOGGLE_SHOWN_SPINNER,
+                });
+                return;
+            }
+            const data = Yaml.safeLoad(yamldata.toString());
+            const eventObjs = data as IEventObject[];
+            dispatch(createShowMapAction(eventObjs));
+            dispatch<IToggleShownSpinnerAction>({
+                type: TOGGLE_SHOWN_SPINNER,
+            });
+        })();
+        return {
+            type: TOGGLE_SHOWN_SPINNER,
+        }
 }
