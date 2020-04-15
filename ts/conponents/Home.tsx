@@ -23,12 +23,12 @@ const ShowContent = Styled.div`
 
 class Home extends React.Component<IMap, {}> {
     public render() {
-        {console.log(this.props.eventObjs);}
+        const { eventObjs } = this.props;
         return (
             <HomeContainer>
                 <ShowContent>
                     <CommandList />
-                    <HomeUnderPart />
+                    <HomeUnderPart eventObjs={eventObjs} />
                 </ShowContent>
             </HomeContainer>
         );

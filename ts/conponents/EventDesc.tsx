@@ -12,11 +12,17 @@ const Container = Styled.div`
 `;
 // #endregion
 
-export class EventDesc extends React.Component {
+interface IProps {
+    id: string;
+    title: string;
+}
+
+export class EventDesc extends React.Component<IProps, {}> {
     public render() {
+        const { id, title } = this.props;
         return(
             <Container>
-                <div>EventName</div>
+                <div>{ title }</div>
             </Container>
         );
     }
