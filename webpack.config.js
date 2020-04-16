@@ -14,8 +14,9 @@ module.exports = {
     devtool: 'source-map',
     // 出力先設定 __dirname は node でのカレントディレクトリのパスが格納される変数
     output: {
+        publicPath: '/',
         path: path.join(__dirname, 'dist'),
-        filename: 'index.js'
+        filename: 'index.js',
     },
     // ファイルタイプ毎の処理を記述する
     module: {
@@ -43,12 +44,20 @@ module.exports = {
             {
                 test: /\.css$/,
                 loaders: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(gif|png|jpg)$/,
+                loader: 'url-loader',
+                options: {
+                    name: 'icons/[name].[ext]',
+                },
             }
         ],
     },
    // 処理対象のファイルを記載する
     resolve: {
         extensions: [
+            '.png',
             '.ts',
             '.tsx',
             '.js', // node_modulesのライブラリ読み込みに必要

@@ -3,6 +3,7 @@ import Styled from 'styled-components'
 import { CommandIcon } from './CommandIcon';
 import store from '../Store';
 import { createLoadEventsAction } from '../actions/EventActionCreator';
+import hoge from './icons/newfile.png';
 
 // #region styled
 const Container = Styled.div`
