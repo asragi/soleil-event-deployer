@@ -17,7 +17,7 @@ export class HomeUnderPart extends React.Component<IMap, {}> {
         return(
             <Container>
                 <MapEventList eventObjs={eventObjs} />
-                <MapDisplay />
+                <MapDisplay map={this.props}/>
             </Container>
         );
     }
