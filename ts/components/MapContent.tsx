@@ -39,7 +39,6 @@ class MapEventField extends React.Component<IMap, {}> {
                     top: String(obj.pos.y) + 'px',
                     left: String(obj.pos.x) + 'px',
                 };
-                console.log(obj);
                 return (
                     <button style={style}>
                         {obj.name}

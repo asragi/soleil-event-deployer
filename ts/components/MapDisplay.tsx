@@ -17,9 +17,14 @@ const Container = Styled.div`
 
 interface IProps {
     map: IMap;
+    mapImg: string;
 }
 
-export class MapDisplay extends React.Component<IProps, {}> {
+interface IState {
+    mapImg: string;
+}
+
+export class MapDisplay extends React.Component<IProps, IState> {
     public componentDidMount() {
         const elm = document.getElementById("viewport");
         new ScrollBooster({ 
@@ -29,10 +34,10 @@ export class MapDisplay extends React.Component<IProps, {}> {
     }
 
     public render() {
-        const { map } = this.props;
+        const { map, mapImg } = this.props;
         const renderDoms = (
             <Container id={"viewport"}>
-                <MapContent base64src={''} map={map} />
+                <MapContent base64src={mapImg} map={map} />
             </Container>
         );
         return(renderDoms);

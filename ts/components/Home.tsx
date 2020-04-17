@@ -21,17 +21,30 @@ const ShowContent = Styled.div`
 `;
 //#endregion
 
-class Home extends React.Component<IMap, {}> {
+interface HomeState {
+    mapImg: string;
+}
+
+class Home extends React.Component<IMap, HomeState> {
+    constructor(props: IMap) {
+        super(props);
+        this.state = {mapImg: ''};
+    }
+
     public render() {
         const { eventObjs } = this.props;
         return (
             <HomeContainer>
                 <ShowContent>
-                    <CommandList />
-                    <HomeUnderPart eventObjs={eventObjs} />
+                    <CommandList onLoadImg={ this.onLoadImg }/>
+                    <HomeUnderPart map={this.props} mapImg={this.state.mapImg} />
                 </ShowContent>
             </HomeContainer>
         );
+    }
+
+    private onLoadImg = (mapImg: string): void => {
+        this.setState({ mapImg: mapImg });
     }
 }
 

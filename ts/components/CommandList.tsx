@@ -3,10 +3,12 @@ import Styled from 'styled-components'
 import { CommandIcon } from './CommandIcon';
 import store from '../Store';
 import { createLoadEventsAction } from '../actions/EventActionCreator';
+import { openDataFolder } from '../utils/OpenMapFolder';
 import newfile from './icons/newfile.png';
 import openfile from './icons/openfile.png';
 import savefile from './icons/savefile.png';
 import savefileas from './icons/savefileas.png';
+
 
 // #region styled
 const Container = Styled.div`
@@ -16,8 +18,12 @@ const Container = Styled.div`
     align-items: center;
 `;
 
+interface IProps{
+    onLoadImg?: (mapImg: string) => void;
+}
+
 // #endregion
-export class CommandList extends React.Component<{}, {}> {
+export class CommandList extends React.Component<IProps, {}> {
     public render() {
         return (
             <Container>
@@ -34,7 +40,14 @@ export class CommandList extends React.Component<{}, {}> {
     }
 
     private LoadData = async () => {
-        store.dispatch(createLoadEventsAction(store.dispatch));
+        const { onLoadImg } = this.props;
+        const folderData = await openDataFolder();
+        if (!folderData) {
+            alert("Cannot load file!");
+            return;
+        }
+        store.dispatch(createLoadEventsAction(store.dispatch, folderData.map));
+        !!onLoadImg && onLoadImg(folderData.mapImg);
     }
 
     private SaveAsSameFile = () => {

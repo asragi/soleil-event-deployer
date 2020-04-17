@@ -11,13 +11,18 @@ const Container = Styled.div`
 `;
 // #endregion
 
-export class HomeUnderPart extends React.Component<IMap, {}> {
+interface IProps {
+    map: IMap;
+    mapImg: string;
+}
+
+export class HomeUnderPart extends React.Component<IProps, {}> {
     public render() {
-        const { eventObjs } = this.props;
+        const { map, mapImg } = this.props;
         return(
             <Container>
-                <MapEventList eventObjs={eventObjs} />
-                <MapDisplay map={this.props}/>
+                <MapEventList eventObjs={map.eventObjs} />
+                <MapDisplay map={map} mapImg={mapImg}/>
             </Container>
         );
     }
