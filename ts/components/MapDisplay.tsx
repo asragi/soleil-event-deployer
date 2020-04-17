@@ -20,21 +20,21 @@ interface IProps {
 }
 
 export class MapDisplay extends React.Component<IProps, {}> {
-    public render() {
-        const { map } = this.props;
-        const renderDoms = (
-            <Container ref= {elm => this.scrollbooster(elm)}>
-                <MapContent base64src={''} map={map} />
-            </Container>
-        );
-        return(renderDoms);
-    }
-
-    private scrollbooster(elm: HTMLElement | null): void {
-        return;
+    public componentDidMount() {
+        const elm = document.getElementById("viewport");
         new ScrollBooster({ 
             viewport: elm,
             scrollMode: 'transform',
          });
+    }
+
+    public render() {
+        const { map } = this.props;
+        const renderDoms = (
+            <Container id={"viewport"}>
+                <MapContent base64src={''} map={map} />
+            </Container>
+        );
+        return(renderDoms);
     }
 }
