@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import ScrollBooster from 'scrollbooster';
 import { $DAWN_LIGHT_GOLD } from './FoundationStyles';
 
 // #region styled
@@ -14,10 +15,18 @@ const Container = Styled.div`
 
 export class MapDisplay extends React.Component<{}, {}> {
     public render() {
-        return(
-            <Container>
-                
+        const renderDoms = (
+            <Container ref= {elm => this.scrollbooster(elm)}>
+                <div>test</div>
             </Container>
         );
+        return(renderDoms);
+    }
+
+    private scrollbooster(elm: HTMLElement | null): void {
+        new ScrollBooster({ 
+            viewport: elm,
+            scrollMode: 'transform',
+         });
     }
 }
