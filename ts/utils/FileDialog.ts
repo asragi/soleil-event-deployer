@@ -7,13 +7,14 @@ import { remote } from 'electron';
  * @param fileOptions
  * @returns {Buffer}
  */
-export const openFileDialog = async (dialogOptions: any, fileOptions = 'utf8') => {
+export const openFileDialog = async (
+  dialogOptions: any, properties: String[], fileOptions = 'utf8') => {
     const win = remote.BrowserWindow.getFocusedWindow()
     if (!win) return;
     const fileNames = await remote.dialog.showOpenDialog(
-      win, { ...dialogOptions, properties: ['openFile'] }
+      win, { ...dialogOptions, properties: properties}
     );
-    return fileNames ? readFile(fileNames.filePaths[0], fileOptions) : undefined
+    return fileNames;
   }
 
 /**
