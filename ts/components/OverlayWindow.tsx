@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { IEventObject } from 'ts/states/IEvent';
 
 const GrayBack = Styled.div`
     position: fixed;
@@ -12,19 +13,16 @@ const GrayBack = Styled.div`
     z-index: 1;
 `;
 
-interface ILocalState {
+interface IProps {
     shown: boolean;
+    nowTarget?: IEventObject;
+    onClose?: () => void;
 }
 
-export class OverlayWindow extends React.Component<{}, ILocalState> {
-    public constructor(props: {}) {
-        super(props);
-
-        this.state = { shown: true };
-    }
-
+export class OverlayWindow extends React.Component<IProps, {}> {
     public render() {
-        if (!this.state.shown) {
+        const { shown, nowTarget } = this.props;
+        if (!shown || !nowTarget) {
             return null;
         }
         return (
@@ -33,6 +31,7 @@ export class OverlayWindow extends React.Component<{}, ILocalState> {
     }
 
     private onClickGray = (): void => {
-        this.setState({ shown: false });
+        const { onClose } = this.props;
+        !!onClose && onClose();
     }
 }

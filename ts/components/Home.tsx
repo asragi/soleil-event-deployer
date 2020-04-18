@@ -4,7 +4,7 @@ import Styled from 'styled-components';
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
 import { OverlayWindow } from './OverlayWindow';
-import { IMap } from '../states/IEvent';
+import { IMap, IEventObject } from '../states/IEvent';
 import { IState } from '../IStore';
 
 //#region styled
@@ -24,22 +24,33 @@ const ShowContent = Styled.div`
 
 interface HomeState {
     mapImg: string;
+    nowTargetEvent?: IEventObject;
+    shown: boolean;
 }
 
 class Home extends React.Component<IMap, HomeState> {
     constructor(props: IMap) {
         super(props);
-        this.state = {mapImg: ''};
+        this.state = {
+            mapImg: '',
+            shown: false,
+        };
     }
 
     public render() {
+        const { shown, nowTargetEvent } = this.state;
         return (
             <>
-                <OverlayWindow />
+                <OverlayWindow
+                    shown={shown} nowTarget={nowTargetEvent}
+                    onClose={this.closeOverlay}
+                />
                 <HomeContainer>
                     <ShowContent>
                         <CommandList onLoadImg={ this.onLoadImg }/>
-                        <HomeUnderPart map={this.props} mapImg={this.state.mapImg} />
+                        <HomeUnderPart
+                            map={this.props} mapImg={this.state.mapImg}
+                            callWindow={this.callWindow} />
                     </ShowContent>
                 </HomeContainer>
             </>
@@ -48,6 +59,14 @@ class Home extends React.Component<IMap, HomeState> {
 
     private onLoadImg = (mapImg: string): void => {
         this.setState({ mapImg: mapImg });
+    }
+
+    private closeOverlay = (): void => {
+        this.setState({ shown: false });
+    }
+
+    private callWindow = (target: IEventObject) => {
+        this.setState({ nowTargetEvent: target, shown: true });
     }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components'
 import { CSSProperties } from 'react';
-import { IMap } from '../states/IEvent';
+import { IMap, IEventObject } from '../states/IEvent';
 
 // #region styled
 const Container = Styled.div`
@@ -12,15 +12,16 @@ const Container = Styled.div`
 interface IProps{
     map: IMap;
     base64src: string;
+    callWindow: (target :IEventObject) => void;
 }
 
 export class MapContent extends React.Component<IProps, {}> {
     public render() {
-        const { base64src, map } = this.props;
+        const { base64src, map, callWindow } = this.props;
         return(
             <Container>
                 { this.renderMap(base64src) }
-                <MapEventField eventObjs={map.eventObjs} />
+                <MapEventField map={map} callWindow={callWindow}/>
             </Container>
         );
     }
@@ -31,9 +32,15 @@ export class MapContent extends React.Component<IProps, {}> {
     }
 }
 
-class MapEventField extends React.Component<IMap, {}> {
+interface IMapButtonProps {
+    map: IMap;
+    callWindow: (target: IEventObject) => void;
+}
+
+class MapEventField extends React.Component<IMapButtonProps, {}> {
     public render() {
-        const elms = this.props.eventObjs.map(
+        const { map, callWindow } = this.props;
+        const elms = map.eventObjs.map(
             obj => {
                 const style: CSSProperties = {
                     position: 'absolute',
@@ -41,7 +48,7 @@ class MapEventField extends React.Component<IMap, {}> {
                     left: String(obj.pos.x) + 'px',
                 };
                 return (
-                    <button style={style}>
+                    <button style={style} onClick={() => { callWindow(obj); }}>
                         {obj.name}
                     </button>
                 );

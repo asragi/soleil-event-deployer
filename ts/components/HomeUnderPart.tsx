@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { MapEventList } from './MapEventList';
 import { MapDisplay } from './MapDisplay';
-import { IMap } from '../states/IEvent';
+import { IMap, IEventObject } from '../states/IEvent';
 
 // #region styled
 const Container = Styled.div`
@@ -14,6 +14,7 @@ const Container = Styled.div`
 interface IProps {
     map: IMap;
     mapImg: string;
+    callWindow: (target: IEventObject) => void;
 }
 
 export class HomeUnderPart extends React.Component<IProps, {}> {
@@ -22,7 +23,7 @@ export class HomeUnderPart extends React.Component<IProps, {}> {
         return(
             <Container>
                 <MapEventList eventObjs={map.eventObjs} />
-                <MapDisplay map={map} mapImg={mapImg}/>
+                <MapDisplay map={map} mapImg={mapImg} callWindow={this.props.callWindow}/>
             </Container>
         );
     }

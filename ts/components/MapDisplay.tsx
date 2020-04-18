@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 import ScrollBooster from 'scrollbooster';
 import { $DAWN_LIGHT_GOLD } from './FoundationStyles';
 import { MapContent } from './MapContent'
-import { IMap } from 'ts/states/IEvent';
+import { IMap, IEventObject } from 'ts/states/IEvent';
 
 // #region styled
 
@@ -26,6 +26,7 @@ const ViewPort = Styled.div`
 interface IProps {
     map: IMap;
     mapImg: string;
+    callWindow: (target: IEventObject) => void;
 }
 
 interface IState {
@@ -47,7 +48,9 @@ export class MapDisplay extends React.Component<IProps, IState> {
         const { map, mapImg } = this.props;
         const renderDoms = (
             <ViewPort id={"viewport"}>
-                <MapContent base64src={mapImg} map={map} />
+                <MapContent
+                    base64src={mapImg} map={map}
+                    callWindow={this.props.callWindow} />
             </ViewPort>
         );
         return(renderDoms);
