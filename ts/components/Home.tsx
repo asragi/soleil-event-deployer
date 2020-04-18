@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Styled from 'styled-components';
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
+import { OverlayWindow } from './OverlayWindow';
 import { IMap } from '../states/IEvent';
 import { IState } from '../IStore';
 
@@ -33,12 +34,15 @@ class Home extends React.Component<IMap, HomeState> {
 
     public render() {
         return (
-            <HomeContainer>
-                <ShowContent>
-                    <CommandList onLoadImg={ this.onLoadImg }/>
-                    <HomeUnderPart map={this.props} mapImg={this.state.mapImg} />
-                </ShowContent>
-            </HomeContainer>
+            <>
+                <OverlayWindow />
+                <HomeContainer>
+                    <ShowContent>
+                        <CommandList onLoadImg={ this.onLoadImg }/>
+                        <HomeUnderPart map={this.props} mapImg={this.state.mapImg} />
+                    </ShowContent>
+                </HomeContainer>
+            </>
         );
     }
 
