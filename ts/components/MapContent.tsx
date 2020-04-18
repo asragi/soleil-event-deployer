@@ -6,6 +6,7 @@ import { IMap } from '../states/IEvent';
 // #region styled
 const Container = Styled.div`
     position: relative;
+    height: 0;
 `;
 
 interface IProps{

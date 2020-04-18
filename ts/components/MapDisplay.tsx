@@ -6,12 +6,20 @@ import { MapContent } from './MapContent'
 import { IMap } from 'ts/states/IEvent';
 
 // #region styled
+
 const Container = Styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+`;
+
+const ViewPort = Styled.div`
     display: flex;
     border-radius: 5px;
     border: solid ${$DAWN_LIGHT_GOLD} 1px;
-    flex-grow: 1;
-    overflow: auto;
+    flex: 1;
+    overflow: scroll;
+    cursor: move;
 `;
 // #endregion
 
@@ -27,18 +35,20 @@ interface IState {
 export class MapDisplay extends React.Component<IProps, IState> {
     public componentDidMount() {
         const elm = document.getElementById("viewport");
+        
         new ScrollBooster({ 
             viewport: elm,
             scrollMode: 'transform',
+            emulateScroll: true,
          });
     }
 
     public render() {
         const { map, mapImg } = this.props;
         const renderDoms = (
-            <Container id={"viewport"}>
+            <ViewPort id={"viewport"}>
                 <MapContent base64src={mapImg} map={map} />
-            </Container>
+            </ViewPort>
         );
         return(renderDoms);
     }

@@ -32,7 +32,6 @@ class Home extends React.Component<IMap, HomeState> {
     }
 
     public render() {
-        const { eventObjs } = this.props;
         return (
             <HomeContainer>
                 <ShowContent>

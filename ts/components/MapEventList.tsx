@@ -7,7 +7,8 @@ import { IMap } from '../states/IEvent';
 const EList = Styled.div`
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 150px;
+    flex-shrink: 0;
     margin-right: 4px;
 `;
 //#endregion
