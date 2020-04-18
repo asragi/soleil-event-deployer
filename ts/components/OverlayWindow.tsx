@@ -1,6 +1,8 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { IEventObject } from 'ts/states/IEvent';
+import { EventWindow } from './eventWindow/EventWindow';
+import { $OverlayWindowBack } from '../utils/DepthNum';
 
 const GrayBack = Styled.div`
     position: fixed;
@@ -10,7 +12,7 @@ const GrayBack = Styled.div`
     width: 100%;
     background: gray;
     opacity: 50%;
-    z-index: 1;
+    z-index: ${$OverlayWindowBack};
 `;
 
 interface IProps {
@@ -25,8 +27,11 @@ export class OverlayWindow extends React.Component<IProps, {}> {
         if (!shown || !nowTarget) {
             return null;
         }
-        return (
-            <GrayBack onClick={this.onClickGray} />
+        return (    
+            <>
+                <GrayBack onClick={this.onClickGray} />
+                <EventWindow target={nowTarget} />
+            </>
         );
     }
 
