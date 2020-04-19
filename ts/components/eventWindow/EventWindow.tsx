@@ -1,7 +1,9 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { IEventObject } from '../../states/IEvent';
+import { Header } from './Header';
+import { EventDescription } from './EventDescription';
 import { $OverlayWindow } from '../../utils/DepthNum';
-import { IEventObject } from 'ts/states/IEvent';
 import { $DAWN_LIGHT_GOLD, $DAWN_BLACK } from '../FoundationStyles';
 
 const $Margin = 30;
@@ -18,8 +20,7 @@ const WindowBack = Styled.div`
     z-index: ${$OverlayWindow};
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 `;
 
 interface IProps {
@@ -28,9 +29,11 @@ interface IProps {
 
 export class EventWindow extends React.Component<IProps, {}> {
     public render() {
+        const { target } = this.props;
         return (
             <WindowBack>
-                {this.props.target.name}
+                <Header target={target} />
+                <EventDescription target={target} />
             </WindowBack>
         );
     }

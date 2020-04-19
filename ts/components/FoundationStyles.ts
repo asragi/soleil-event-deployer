@@ -5,6 +5,8 @@ import { createGlobalStyle } from "styled-components";
 export const $DAWN_LIGHT_GOLD = '#DEBB9C';
 export const $DAWN_BLACK = '#0F0700';
 
+export const $GOLD_BORDER = `border: solid ${$DAWN_LIGHT_GOLD} 1px;`;
+
 export const GlobalStyle = createGlobalStyle`
     html, body {
         font-family: "Meiryo UI";
