@@ -1,9 +1,11 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { IEvent } from '../../states/IEvent';
+import { BoxButton, Image } from '../GeneralComponent';
 import { 
     $GOLD_BORDER, $DAWN_LIGHT_GOLD, $DAWN_BLACK
 } from '../../components/FoundationStyles';
+import plusImg from '../icons/newfile.png';
 
 interface IProps {
     eventSet?: IEvent;
@@ -34,6 +36,9 @@ const LiElement = Styled.div`
         cursor: pointer;
     }
 `;
+const AddEventButton = Styled(BoxButton)`
+    margin: 3px auto 0 auto;
+`;
 //#endregion
 
 /** イベント詳細ウィンドウで表示されるイベントのリスト */
@@ -43,6 +48,9 @@ export class EventList extends React.Component<IProps, {}> {
         return(
             <Container>
                 {this.CreateEventListItems(eventSet)}
+                <AddEventButton onClick={this.onClickAdd}>
+                    <Image src={plusImg} />
+                </AddEventButton>
             </Container>
         );
     }
@@ -53,9 +61,15 @@ export class EventList extends React.Component<IProps, {}> {
         return events.map(
             elm => {
                 return (
-                    <LiElement>{elm.type}</LiElement>
+                    <LiElement>
+                        {elm.type}
+                    </LiElement>
                 );
             }
         );
+    }
+
+    private onClickAdd = () => {
+
     }
 }
