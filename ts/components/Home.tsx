@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Styled from 'styled-components';
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
-import { OverlayWindow } from './OverlayWindow';
+import { EventEditWindow } from './EventEditWindow';
 import { IMap, IEventObject } from '../states/IEvent';
 import { IState } from '../IStore';
 
@@ -38,13 +38,9 @@ class Home extends React.Component<IMap, HomeState> {
     }
 
     public render() {
-        const { shown, nowTargetEvent } = this.state;
         return (
             <>
-                <OverlayWindow
-                    shown={shown} nowTarget={nowTargetEvent}
-                    onClose={this.closeOverlay}
-                />
+                {this.renderEditWindow()}
                 <HomeContainer>
                     <ShowContent>
                         <CommandList onLoadImg={ this.onLoadImg }/>
@@ -67,6 +63,17 @@ class Home extends React.Component<IMap, HomeState> {
 
     private callWindow = (target: IEventObject) => {
         this.setState({ nowTargetEvent: target, shown: true });
+    }
+
+    private renderEditWindow = () => {
+        const { shown, nowTargetEvent } = this.state;
+        if (!nowTargetEvent) return null;
+        return (
+            <EventEditWindow
+                shown={shown} nowTarget={nowTargetEvent}
+                onClose={this.closeOverlay}
+            />
+        );
     }
 }
 

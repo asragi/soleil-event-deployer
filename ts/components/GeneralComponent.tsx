@@ -48,6 +48,7 @@ export const CenterWindow = (margin: number, zIndex: number) => Styled.div`
     left: ${margin}px;
     bottom: ${margin}px;
     z-index: ${zIndex};
+    transition: 0.3s;
 `;
 
 // Primitives

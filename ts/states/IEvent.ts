@@ -1,3 +1,5 @@
+import { v4 as UUID } from 'uuid';
+
 export interface IEventObject {
     type: string;
     name: string;
@@ -5,7 +7,7 @@ export interface IEventObject {
     standAnimation?: string[];
     walkAnimation?: string[];
     dashAnimation?: string[];
-    eventSeqs?: IEvent[];
+    eventSeqs: IEvent[];
 }
 
 export interface IPos {
@@ -20,11 +22,20 @@ export interface IEvent {
 
 // イベントシーケンスの1つ1つの要素
 export interface IEventBase {
+    id: string;
     type: string;
     content: string;
     branchType?: string;
     Events?: IEventBase[];
 }
+
+export const InitialEvent = (type: string): IEventBase => {
+    return {
+        id: UUID(),
+        type: type,
+        content: '',
+    };
+};
 
 export interface IMap {
     eventObjs: IEventObject[];
@@ -38,10 +49,12 @@ export const createEventObject = (
     type: string,
     name: string,
     pos: IPos,
+    eventSeqs: IEvent[],
 ): IEventObject => {
     return {
         type,
         name,
-        pos
+        pos,
+        eventSeqs,
     };
 };

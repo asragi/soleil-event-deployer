@@ -1,8 +1,9 @@
 /** Unionパターンで列挙記述 */
 const eventList = Object.freeze(
     {
-        "message": null,
-        "changeInput": null,
+        'none': null,
+        'message': null,
+        'changeInput': null,
     }
 );
 type EventType = keyof typeof eventList;
