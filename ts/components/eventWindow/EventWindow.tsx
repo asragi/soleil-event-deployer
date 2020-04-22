@@ -4,21 +4,9 @@ import { IEventObject } from '../../states/IEvent';
 import { Header } from './Header';
 import { EventDescription } from './EventDescription';
 import { $OverlayWindow } from '../../utils/DepthNum';
-import { $DAWN_LIGHT_GOLD, $DAWN_BLACK } from '../FoundationStyles';
+import { CenterWindow } from '../GeneralComponent';
 
-const $Margin = 30;
-const WindowBack = Styled.div`
-    border-radius: 5px;
-    border: solid ${$DAWN_LIGHT_GOLD} 1px;
-    background-color: ${$DAWN_BLACK};
-    color: ${$DAWN_LIGHT_GOLD};
-    position: fixed;
-    top: ${$Margin}px;
-    right: ${$Margin}px;
-    left: ${$Margin}px;
-    bottom: ${$Margin}px;
-    z-index: ${$OverlayWindow};
-
+const WindowBack = Styled(CenterWindow(30, $OverlayWindow))`
     display: flex;
     flex-direction: column;
 `;

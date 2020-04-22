@@ -10,11 +10,6 @@ export const BoxButton = Styled.button`
     border: solid ${$DAWN_LIGHT_GOLD} 1px;
 `;
 
-/** 画像の大きさを要素の大きさに合わせるコンポーネント */
-export const Image = Styled.img`
-    width: 100%;
-`;
-
 /** hoverで見た目が変わる矩形要素 */
 export const ClickableRect = Styled.div`
     ${$GOLD_BORDER}
@@ -38,4 +33,25 @@ export const GrayBackPrototype = (depth: number) => Styled.div`
     background: gray;
     opacity: 50%;
     z-index: ${depth};
+`;
+
+/** 画面中央に生成されるウィンドウ */
+export const CenterWindow = (margin: number, zIndex: number) => Styled.div`
+    border-radius: 5px;
+    border: solid ${$DAWN_LIGHT_GOLD} 1px;
+    background-color: ${$DAWN_BLACK};
+    color: ${$DAWN_LIGHT_GOLD};
+    transition: 0.3s;
+    position: fixed;
+    top: ${margin}px;
+    right: ${margin}px;
+    left: ${margin}px;
+    bottom: ${margin}px;
+    z-index: ${zIndex};
+`;
+
+// Primitives
+/** 画像の大きさを要素の大きさに合わせるコンポーネント */
+export const Image = Styled.img`
+    width: 100%;
 `;
