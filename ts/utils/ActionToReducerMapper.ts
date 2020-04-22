@@ -1,5 +1,5 @@
-import { Action } from "redux";
-import clone from "clone";
+import { Action } from 'redux';
+import clone from 'clone';
 
 type WorkOfAction<S, A extends Action = any> = (state: S, action: A) => void;
 

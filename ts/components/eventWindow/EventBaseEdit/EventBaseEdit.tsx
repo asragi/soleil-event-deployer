@@ -24,9 +24,9 @@ export class EventBaseEdit extends React.Component<IProps, {}> {
 
     private switchWindow = (type: EventType): JSX.Element | null => {
         switch (type) {
-            case "message":
+            case 'message':
                 return <MessageEdit />
-            case "changeInput":
+            case 'changeInput':
                 break;
         }
         return null;

@@ -1,5 +1,5 @@
-import { Dispatch, Store } from "redux";
-import { 
+import { Dispatch, Store } from 'redux';
+import {
     SHOW_EVENTS,
     IShowEventAction,
     TOGGLE_SHOWN_SPINNER,

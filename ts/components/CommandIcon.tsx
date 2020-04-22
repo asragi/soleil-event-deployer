@@ -6,7 +6,7 @@ import { BoxButton } from './GeneralComponent';
 const Icon = Styled.img`
     width: 100%;
 `;
-// #endregion 
+// #endregion
 
 interface IProps {
     onClick?: () => void;

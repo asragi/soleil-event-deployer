@@ -32,7 +32,7 @@ export class NewEventList extends React.Component<IProps, {}> {
 
     private CreateList = () => {
         return EventTypeList.map(
-            t => 
+            t =>
                 <EventLi>
                     <EventLiInner onClick={() => this.props.onDecided(t)}>
                         {t}

@@ -17,7 +17,6 @@ export class EventConditionList extends React.Component {
     public render() {
         return(
             <Container>
-                
             </Container>
         );
     }

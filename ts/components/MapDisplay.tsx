@@ -35,9 +35,9 @@ interface IState {
 
 export class MapDisplay extends React.Component<IProps, IState> {
     public componentDidMount() {
-        const elm = document.getElementById("viewport");
-        
-        new ScrollBooster({ 
+        const elm = document.getElementById('viewport');
+
+        new ScrollBooster({
             viewport: elm,
             scrollMode: 'transform',
             emulateScroll: true,
@@ -47,7 +47,7 @@ export class MapDisplay extends React.Component<IProps, IState> {
     public render() {
         const { map, mapImg } = this.props;
         const renderDoms = (
-            <ViewPort id={"viewport"}>
+            <ViewPort id={'viewport'}>
                 <MapContent
                     base64src={mapImg} map={map}
                     callWindow={this.props.callWindow} />

@@ -32,7 +32,7 @@ export interface IEventBase {
 export const InitialEvent = (type: string): IEventBase => {
     return {
         id: UUID(),
-        type: type,
+        type,
         content: '',
     };
 };

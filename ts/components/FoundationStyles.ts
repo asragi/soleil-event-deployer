@@ -1,6 +1,5 @@
 import 'reset-css/reset.css';
-
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const $DAWN_LIGHT_GOLD = '#DEBB9C';
 export const $DAWN_BLACK = '#0F0700';

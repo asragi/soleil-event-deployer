@@ -45,7 +45,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
         if (!shown) {
             return null;
         }
-        return (    
+        return (
             <>
                 <GrayBack onClick={this.onClickGray} />
                 <EventWindow target={targetEvent} onClickAdd={this.onClickPlus} />

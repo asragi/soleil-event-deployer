@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { v4 as UUID } from 'uuid';
-import { IEventObject } from "../states/IEvent"
+import { IEventObject } from '../states/IEvent';
 
 export const SHOW_EVENTS = UUID();
 

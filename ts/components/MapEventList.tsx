@@ -3,7 +3,7 @@ import Styled from 'styled-components'
 import { EventDesc } from './EventDesc';
 import { IMap } from '../states/IEvent';
 
-//#region 
+//#region
 const EList = Styled.div`
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@ export class MapEventList extends React.Component<IMap, {}> {
     public render() {
         const { eventObjs } = this.props;
         const eventDescList = eventObjs.map((it) => {
-            return ( <EventDesc id={"0"} title={it.name} /> );
+            return ( <EventDesc id={'0'} title={it.name} /> );
         });
 
         return (

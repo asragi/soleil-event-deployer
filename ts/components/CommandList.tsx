@@ -43,7 +43,7 @@ export class CommandList extends React.Component<IProps, {}> {
         const { onLoadImg } = this.props;
         const folderData = await openDataFolder();
         if (!folderData) {
-            alert("Cannot load file!");
+            alert('Cannot load file!');
             return;
         }
         store.dispatch(createLoadEventsAction(store.dispatch, folderData.map));

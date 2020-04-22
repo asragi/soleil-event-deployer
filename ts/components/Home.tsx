@@ -54,7 +54,7 @@ class Home extends React.Component<IMap, HomeState> {
     }
 
     private onLoadImg = (mapImg: string): void => {
-        this.setState({ mapImg: mapImg });
+        this.setState({ mapImg });
     }
 
     private closeOverlay = (): void => {
