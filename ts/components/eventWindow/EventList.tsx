@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { IEvent } from '../../states/IEvent';
-import { BoxButton, Image } from '../GeneralComponent';
+import { BoxButton, Image, ClickableRect } from '../GeneralComponent';
 import { 
     $GOLD_BORDER, $DAWN_LIGHT_GOLD, $DAWN_BLACK
 } from '../../components/FoundationStyles';
@@ -21,21 +21,12 @@ const Container = Styled.div`
     ${$GOLD_BORDER}
     border-radius: 5px;
 `;
-const LiElement = Styled.div`
+const LiElement = Styled(ClickableRect)`
     height: 30px;
-    ${$GOLD_BORDER}
-    border-radius: 5px;
     margin: 3px 3px 0;
     display: flex;
     align-items: center;
     padding-left: 10px;
-    transition: 0.3s;
-
-    &:hover {
-        background: ${$DAWN_LIGHT_GOLD};
-        color: ${$DAWN_BLACK};
-        cursor: pointer;
-    }
 `;
 const AddEventButton = Styled(BoxButton)`
     margin: 3px auto 0 auto;

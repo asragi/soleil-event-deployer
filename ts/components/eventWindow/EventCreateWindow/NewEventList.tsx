@@ -1,8 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import EventType, { EventTypeList } from '../../../utils/EventType'
-import { $DAWN_LIGHT_GOLD, $DAWN_BLACK } from '../../FoundationStyles';
-
+import { ClickableRect } from '../../GeneralComponent';
 //#region style
 const Container = Styled.div`
     display: flex;
@@ -10,6 +9,10 @@ const Container = Styled.div`
 `;
 const EventLi = Styled.div`
     width: 50%;
+`;
+const EventLiInner = Styled(ClickableRect)`
+    margin: 5px;
+    padding: 5px;
 `;
 //#endregion
 
@@ -29,7 +32,12 @@ export class NewEventList extends React.Component<IProps, {}> {
 
     private CreateList = () => {
         return EventTypeList.map(
-            t => <EventLi onClick={() => this.props.onDecided(t)}>{t}</EventLi>
+            t => 
+                <EventLi>
+                    <EventLiInner onClick={() => this.props.onDecided(t)}>
+                        {t}
+                    </EventLiInner>
+                </EventLi>
         );
     }
 }
