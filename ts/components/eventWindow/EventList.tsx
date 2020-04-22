@@ -9,6 +9,7 @@ import plusImg from '../icons/newfile.png';
 
 interface IProps {
     eventSet?: IEvent;
+    onClickAdd: () => void;
 }
 
 //#region Style
@@ -48,7 +49,7 @@ export class EventList extends React.Component<IProps, {}> {
         return(
             <Container>
                 {this.CreateEventListItems(eventSet)}
-                <AddEventButton onClick={this.onClickAdd}>
+                <AddEventButton onClick={this.props.onClickAdd}>
                     <Image src={plusImg} />
                 </AddEventButton>
             </Container>
@@ -67,9 +68,5 @@ export class EventList extends React.Component<IProps, {}> {
                 );
             }
         );
-    }
-
-    private onClickAdd = () => {
-
     }
 }

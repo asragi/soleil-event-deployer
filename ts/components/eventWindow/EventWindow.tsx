@@ -25,15 +25,16 @@ const WindowBack = Styled.div`
 
 interface IProps {
     target: IEventObject;
+    onClickAdd: () => void;
 }
 
 export class EventWindow extends React.Component<IProps, {}> {
     public render() {
-        const { target } = this.props;
+        const { target, onClickAdd } = this.props;
         return (
             <WindowBack>
                 <Header target={target} />
-                <EventDescription target={target} />
+                <EventDescription target={target} onClickAdd={onClickAdd}/>
             </WindowBack>
         );
     }

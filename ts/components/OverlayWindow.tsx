@@ -1,19 +1,12 @@
 import React from 'react';
-import Styled from 'styled-components';
 import { IEventObject } from 'ts/states/IEvent';
 import { EventWindow } from './eventWindow/EventWindow';
+import { EventCreateWindow }  from './eventWindow/EventCreateWindow/EventCreateWindow';
 import { $OverlayWindowBack } from '../utils/DepthNum';
+import EventType from '../utils/EventType';
+import { GrayBackPrototype } from './GeneralComponent';
 
-const GrayBack = Styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: gray;
-    opacity: 50%;
-    z-index: ${$OverlayWindowBack};
-`;
+const GrayBack = GrayBackPrototype($OverlayWindowBack);
 
 interface IProps {
     shown: boolean;
@@ -21,7 +14,18 @@ interface IProps {
     onClose?: () => void;
 }
 
-export class OverlayWindow extends React.Component<IProps, {}> {
+interface ILocalState {
+    showCreateWindow: boolean;
+}
+
+export class OverlayWindow extends React.Component<IProps, ILocalState> {
+    public constructor(props: IProps) {
+        super(props);
+        this.state = {
+            showCreateWindow: false,
+        };
+    }
+
     public render() {
         const { shown, nowTarget } = this.props;
         if (!shown || !nowTarget) {
@@ -30,7 +34,11 @@ export class OverlayWindow extends React.Component<IProps, {}> {
         return (    
             <>
                 <GrayBack onClick={this.onClickGray} />
-                <EventWindow target={nowTarget} />
+                <EventWindow target={nowTarget} onClickAdd={this.onClickAdd} />
+                <EventCreateWindow
+                    shown={this.state.showCreateWindow}
+                    onDecide={this.onDecideEvent}
+                />
             </>
         );
     }
@@ -38,5 +46,14 @@ export class OverlayWindow extends React.Component<IProps, {}> {
     private onClickGray = (): void => {
         const { onClose } = this.props;
         !!onClose && onClose();
+    }
+
+    private onDecideEvent = (type: EventType) => {
+        this.setState({ showCreateWindow: false });
+        console.log(type);
+    }
+
+    private onClickAdd = () => {
+        this.setState({ showCreateWindow: true });
     }
 }
