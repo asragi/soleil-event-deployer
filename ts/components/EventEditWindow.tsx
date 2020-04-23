@@ -48,7 +48,10 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
         return (
             <>
                 <GrayBack onClick={this.onClickGray} />
-                <EventWindow target={targetEvent} onClickAdd={this.onClickPlus} />
+                <EventWindow
+                    target={targetEvent}
+                    onClickAdd={this.onClickPlus}
+                    onStartEdit={this.onStartEditEvent} />
                 <EventCreateWindow
                     shown={showCreateWindow}
                     onDecide={this.onDecideEvent}
@@ -69,12 +72,16 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
 
     private onDecideEvent = (type: EventType) => {
         const newEvent = InitialEvent(type);
+        this.addEvent(newEvent);
+        this.onStartEditEvent(newEvent);
+    }
+
+    private onStartEditEvent = (event: IEventBase) => {
         this.setState({
             showCreateWindow: false,
             showEventEditWindow: true,
-            editingEvent: newEvent,
+            editingEvent: event,
         });
-        this.addEvent(newEvent);
     }
 
     private onClickPlus = () => {

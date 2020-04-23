@@ -31,6 +31,7 @@ const AddEventButton = Styled(BoxButton)`
 interface IProps {
     eventSet?: IEvent;
     onClickAdd: () => void;
+    onStartEdit: (e: IEventBase) => void;
 }
 
 /** イベント詳細ウィンドウで表示されるイベントのリスト */
@@ -50,10 +51,11 @@ export class EventList extends React.Component<IProps, {}> {
 
     private CreateEventListItems = (eventList: IEventBase[]) => {
         if(eventList.length === 0) return null;
+        const startEdit = this.props.onStartEdit;
         return eventList.map(
             elm => {
                 return (
-                    <LiElement key={elm.id}>
+                    <LiElement key={elm.id} onClick={() => startEdit(elm)}>
                         {`${elm.type}:${elm.content}`}
                     </LiElement>
                 );
