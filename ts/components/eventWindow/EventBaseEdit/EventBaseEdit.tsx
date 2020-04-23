@@ -7,6 +7,8 @@ import { $NewEventWindowBack } from '../../../utils/DepthNum';
 interface IProps {
     eventType: EventType,
     show: boolean,
+    onCancel: () => void;
+    onSubmit: () => void;
 }
 
 const GrayBack = GrayBackPrototype($NewEventWindowBack);
@@ -23,9 +25,10 @@ export class EventBaseEdit extends React.Component<IProps, {}> {
     }
 
     private switchWindow = (type: EventType): JSX.Element | null => {
+        const { onCancel, onSubmit } = this.props;
         switch (type) {
             case 'message':
-                return <MessageEdit />
+                return <MessageEdit onCancel={onCancel} onSubmit={onSubmit} />
             case 'changeInput':
                 break;
         }

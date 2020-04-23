@@ -10,6 +10,12 @@ export const BoxButton = Styled.button`
     border: solid ${$DAWN_LIGHT_GOLD} 1px;
 `;
 
+export const RectButton = Styled.button`
+    background-color: ${$DAWN_BLACK};
+    border: solid ${$DAWN_LIGHT_GOLD} 1px;
+    color: ${$DAWN_LIGHT_GOLD};
+`;
+
 /** hoverで見た目が変わる矩形要素 */
 export const ClickableRect = Styled.div`
     ${$GOLD_BORDER}

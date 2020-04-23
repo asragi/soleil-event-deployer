@@ -55,7 +55,9 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
                 />
                 <EventBaseEdit
                     eventType={this.state.nowSelectType}
-                    show={this.state.showEventEditWindow}/>
+                    show={this.state.showEventEditWindow}
+                    onCancel={this.onCancelEdit}
+                    onSubmit={this.onSubmitEdit}/>
             </>
         );
     }
@@ -76,6 +78,14 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
 
     private onClickPlus = () => {
         this.setState({ showCreateWindow: true });
+    }
+
+    private onCancelEdit = () => {
+        this.setState({ showEventEditWindow: false });
+    }
+
+    private onSubmitEdit = () => {
+
     }
 
     private addEvent = (event: IEventBase) => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import Styled from 'styled-components';
-import Clone from 'clone';
 import { IEvent, IEventBase } from '../../states/IEvent';
 import { BoxButton, Image, ClickableRect } from '../GeneralComponent';
 import { $GOLD_BORDER } from '../../components/FoundationStyles';
@@ -34,22 +33,11 @@ interface IProps {
     onClickAdd: () => void;
 }
 
-interface LocalState {
-    events: IEventBase[];
-}
-
 /** イベント詳細ウィンドウで表示されるイベントのリスト */
-export class EventList extends React.Component<IProps, LocalState> {
-    public constructor(props: IProps) {
-        super(props);
-        const events = props.eventSet;
-        this.state = {
-            events: !!events ? events.event : [],
-        }
-    }
-
+export class EventList extends React.Component<IProps, {}> {
     public render() {
-        const { events } = this.state;
+        const { eventSet } = this.props;
+        const events = !!eventSet ? eventSet.event : [];
         return(
             <Container>
                 {this.CreateEventListItems(events)}
