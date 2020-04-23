@@ -3,8 +3,10 @@ import Styled from 'styled-components';
 import { IEvent, IEventBase } from '../../states/IEvent';
 import { BoxButton, Image, ClickableRect } from '../GeneralComponent';
 import { $GOLD_BORDER } from '../../components/FoundationStyles';
+// imgs
 import plusImg from '../icons/newfile.png';
 import trashImg from '../icons/trash.png';
+import copyImg from '../icons/copy.png';
 
 //#region Style
 const Container = Styled.div`
@@ -24,6 +26,10 @@ const LiElement = Styled(ClickableRect)`
     padding-left: 10px;
 `;
 
+const OpeButton = Styled(BoxButton)`
+    margin-left: 3px;
+`;
+
 const LiText = Styled.div`
     flex-grow: 1;
 `;
@@ -37,6 +43,8 @@ interface IProps {
     eventSet?: IEvent;
     onClickAdd: () => void;
     onStartEdit: (e: IEventBase) => void;
+    onDelete: (e: IEventBase) => void;
+    onCopy: (e: IEventBase) => void;
 }
 
 /** イベント詳細ウィンドウで表示されるイベントのリスト */
@@ -56,13 +64,18 @@ export class EventList extends React.Component<IProps, {}> {
 
     private CreateEventListItems = (eventList: IEventBase[]) => {
         if(eventList.length === 0) return null;
-        const startEdit = this.props.onStartEdit;
+        const { onStartEdit, onDelete, onCopy } = this.props;
         return eventList.map(
             elm => {
                 return (
-                    <LiElement key={elm.id} onClick={() => startEdit(elm)}>
+                    <LiElement key={elm.id} onClick={() => onStartEdit(elm)}>
                         <LiText>{`${elm.type}:${elm.content}`}</LiText>
-                        <BoxButton><Image src={trashImg}/></BoxButton>
+                        <OpeButton onClick={() => onCopy(elm)}>
+                            <Image src={copyImg}/>
+                        </OpeButton>
+                        <OpeButton onClick={() => onDelete(elm)}>
+                            <Image src={trashImg}/>
+                        </OpeButton>
                     </LiElement>
                 );
             }

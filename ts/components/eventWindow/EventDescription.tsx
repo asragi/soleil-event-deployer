@@ -15,6 +15,8 @@ interface IProps {
     target: IEventObject;
     onClickAdd: () => void;
     onStartEdit: (e: IEventBase) => void;
+    onDelete: (e: IEventBase) => void;
+    onCopy: (e: IEventBase) => void;    
 }
 
 /**
@@ -22,7 +24,7 @@ interface IProps {
  */
 export class EventDescription extends React.Component<IProps, {}> {
     public render() {
-        const { target, onClickAdd, onStartEdit } = this.props;
+        const { target, onClickAdd, onStartEdit, onDelete, onCopy } = this.props;
         // TODO: EventSequenceが複数ある場合の対応
         const es = !!target.eventSeqs ? target.eventSeqs[0] : undefined;
         return(
@@ -31,7 +33,9 @@ export class EventDescription extends React.Component<IProps, {}> {
                 <EventList
                     eventSet={es}
                     onClickAdd={onClickAdd}
-                    onStartEdit={onStartEdit}/>
+                    onStartEdit={onStartEdit}
+                    onDelete={onDelete}
+                    onCopy={onCopy}/>
             </Container>
         );
     }

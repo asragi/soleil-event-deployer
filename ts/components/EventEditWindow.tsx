@@ -1,5 +1,6 @@
 import React from 'react';
 import Clone from 'clone';
+import { v4 as UUID } from 'uuid';
 // interfaces, settings
 import { IEventObject, IEventBase, InitialEvent } from '../states/IEvent';
 import EventType from '../utils/EventType';
@@ -51,7 +52,9 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
                 <EventWindow
                     target={targetEvent}
                     onClickAdd={this.onClickPlus}
-                    onStartEdit={this.onStartEditEvent} />
+                    onStartEdit={this.onStartEditEvent}
+                    onDelete={this.onDeleteEvent}
+                    onCopy={this.onCopyEvent} />
                 <EventCreateWindow
                     shown={showCreateWindow}
                     onDecide={this.onDecideEvent}
@@ -94,6 +97,16 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
 
     private onDeleteEvent = (target: IEventBase) => {
         this.updateEvent(target, (e, arr) => arr.filter(a => a.id !== e.id));
+    }
+
+    private onCopyEvent = (event: IEventBase) => {
+        this.updateEvent(event, (e, arr) => {
+            const index = arr.findIndex(a => a.id === e.id);
+            const insertEvent = Clone(e);
+            insertEvent.id = UUID();
+            arr.splice(index, 0, insertEvent);
+            return arr;
+        });
     }
 
     private onSubmitEdit = (event: IEventBase) => {

@@ -15,18 +15,22 @@ interface IProps {
     target: IEventObject;
     onClickAdd: () => void;
     onStartEdit: (e: IEventBase) => void;
+    onDelete: (e: IEventBase) => void;
+    onCopy: (e: IEventBase) => void;
 }
 
 export class EventWindow extends React.Component<IProps, {}> {
     public render() {
-        const { target, onClickAdd, onStartEdit } = this.props;
+        const { target, onClickAdd, onStartEdit, onDelete, onCopy } = this.props;
         return (
             <WindowBack>
                 <Header target={target} />
                 <EventDescription
                     target={target}
                     onClickAdd={onClickAdd}
-                    onStartEdit={onStartEdit}/>
+                    onStartEdit={onStartEdit}
+                    onDelete={onDelete}
+                    onCopy={onCopy} />
             </WindowBack>
         );
     }
