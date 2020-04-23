@@ -24,7 +24,7 @@ interface ILocalState {
     showEventEditWindow: boolean;
     targetEvent: IEventObject;
     pageIndex: number;
-    nowSelectType: EventType;
+    editingEvent?: IEventBase;
 }
 
 export class EventEditWindow extends React.Component<IProps, ILocalState> {
@@ -35,7 +35,6 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             showEventEditWindow: false,
             targetEvent: Clone(props.nowTarget),
             pageIndex: 0,
-            nowSelectType: 'none',
         };
     }
 
@@ -54,7 +53,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
                     onDecide={this.onDecideEvent}
                 />
                 <EventBaseEdit
-                    eventType={this.state.nowSelectType}
+                    editingEvent={this.state.editingEvent}
                     show={this.state.showEventEditWindow}
                     onCancel={this.onCancelEdit}
                     onSubmit={this.onSubmitEdit}/>
@@ -68,12 +67,13 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
     }
 
     private onDecideEvent = (type: EventType) => {
+        const newEvent = InitialEvent(type);
         this.setState({
             showCreateWindow: false,
             showEventEditWindow: true,
-            nowSelectType: type,
+            editingEvent: newEvent,
         });
-        this.addEvent(InitialEvent(type));
+        this.addEvent(newEvent);
     }
 
     private onClickPlus = () => {
@@ -84,8 +84,17 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
         this.setState({ showEventEditWindow: false });
     }
 
-    private onSubmitEdit = () => {
-
+    private onSubmitEdit = (newEvent: IEventBase) => {
+        const cloned = Clone(this.state.targetEvent);
+        const clonedEventSeq = cloned.eventSeqs[this.state.pageIndex];
+        const eventArray = clonedEventSeq.event;
+        // replace event
+        const replaceIndex = eventArray.findIndex(e => e.id === newEvent.id);
+        eventArray.splice(replaceIndex, 1, newEvent);
+        this.setState({ 
+            targetEvent: cloned,
+            showEventEditWindow: false,
+        });
     }
 
     private addEvent = (event: IEventBase) => {

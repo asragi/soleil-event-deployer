@@ -31,7 +31,7 @@ export class NewEventList extends React.Component<IProps, {}> {
     }
 
     private CreateList = () => {
-        return EventTypeList.map(
+        return EventTypeList.filter(e => e !== 'none').map(
             t =>
                 <EventLi>
                     <EventLiInner onClick={() => this.props.onDecided(t)}>
