@@ -53,7 +53,7 @@ export class EventList extends React.Component<IProps, {}> {
         return eventList.map(
             elm => {
                 return (
-                    <LiElement>
+                    <LiElement key={elm.id}>
                         {`${elm.type}:${elm.content}`}
                     </LiElement>
                 );

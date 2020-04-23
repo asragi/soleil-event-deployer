@@ -27,6 +27,7 @@ interface ILocalState {
     editingEvent?: IEventBase;
 }
 
+/** マップオブジェクトのイベントを設定するウィンドウのメインコンポーネント */
 export class EventEditWindow extends React.Component<IProps, ILocalState> {
     public constructor(props: IProps) {
         super(props);
