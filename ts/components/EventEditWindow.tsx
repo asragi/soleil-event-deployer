@@ -111,7 +111,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
 
     private onSubmitEdit = (event: IEventBase) => {
         this.updateEvent(event, (e, arr) => {
-            const replaceIndex = arr.findIndex(e => e.id === e.id);
+            const replaceIndex = arr.findIndex(a => a.id === e.id);
             arr.splice(replaceIndex, 1, e);
             return arr;
         });

@@ -69,11 +69,11 @@ export class EventList extends React.Component<IProps, {}> {
             elm => {
                 return (
                     <LiElement key={elm.id} onClick={() => onStartEdit(elm)}>
-                        <LiText>{`${elm.type}:${elm.content}`}</LiText>
-                        <OpeButton onClick={() => onCopy(elm)}>
+                        <LiText>{`${elm.type}:${elm.content}:${elm.id}`}</LiText>
+                        <OpeButton onClick={(e) => this.PreventExec(e, elm, onCopy)}>
                             <Image src={copyImg}/>
                         </OpeButton>
-                        <OpeButton onClick={() => onDelete(elm)}>
+                        <OpeButton onClick={(e) => this.PreventExec(e, elm, onDelete)}>
                             <Image src={trashImg}/>
                         </OpeButton>
                     </LiElement>
@@ -81,4 +81,11 @@ export class EventList extends React.Component<IProps, {}> {
             }
         );
     }
+
+    private PreventExec = (
+        e: React.MouseEvent, event: IEventBase,
+        action: (event: IEventBase) => void,) => {
+            e.stopPropagation();
+            action(event);
+        }
 }
