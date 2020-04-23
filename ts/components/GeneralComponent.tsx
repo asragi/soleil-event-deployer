@@ -5,7 +5,6 @@ import { $DAWN_LIGHT_GOLD, $GOLD_BORDER, $DAWN_BLACK } from './FoundationStyles'
 export const BoxButton = Styled.button`
     width: 32px;
     height: 32px;
-    margin: 0 4px 4px 0;
     background-color: ${$DAWN_BLACK};
     border: solid ${$DAWN_LIGHT_GOLD} 1px;
 `;

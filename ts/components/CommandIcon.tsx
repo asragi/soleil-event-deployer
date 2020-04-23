@@ -6,6 +6,9 @@ import { BoxButton } from './GeneralComponent';
 const Icon = Styled.img`
     width: 100%;
 `;
+const BButton = Styled(BoxButton)`
+    margin: 0 4px 4px 0;
+`;
 // #endregion
 
 interface IProps {
@@ -16,9 +19,9 @@ interface IProps {
 export class CommandIcon extends React.Component<IProps, {}> {
     public render() {
         return(
-            <BoxButton onClick={this.props.onClick}>
+            <BButton onClick={this.props.onClick}>
                 <Icon src={this.props.src} />
-            </BoxButton>
+            </BButton>
         );
     }
 }

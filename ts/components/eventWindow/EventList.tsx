@@ -4,6 +4,7 @@ import { IEvent, IEventBase } from '../../states/IEvent';
 import { BoxButton, Image, ClickableRect } from '../GeneralComponent';
 import { $GOLD_BORDER } from '../../components/FoundationStyles';
 import plusImg from '../icons/newfile.png';
+import trashImg from '../icons/trash.png';
 
 //#region Style
 const Container = Styled.div`
@@ -21,6 +22,10 @@ const LiElement = Styled(ClickableRect)`
     display: flex;
     align-items: center;
     padding-left: 10px;
+`;
+
+const LiText = Styled.div`
+    flex-grow: 1;
 `;
 
 const AddEventButton = Styled(BoxButton)`
@@ -56,7 +61,8 @@ export class EventList extends React.Component<IProps, {}> {
             elm => {
                 return (
                     <LiElement key={elm.id} onClick={() => startEdit(elm)}>
-                        {`${elm.type}:${elm.content}`}
+                        <LiText>{`${elm.type}:${elm.content}`}</LiText>
+                        <BoxButton><Image src={trashImg}/></BoxButton>
                     </LiElement>
                 );
             }

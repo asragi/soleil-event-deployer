@@ -92,23 +92,36 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
         this.setState({ showEventEditWindow: false });
     }
 
-    private onSubmitEdit = (newEvent: IEventBase) => {
-        const cloned = Clone(this.state.targetEvent);
-        const clonedEventSeq = cloned.eventSeqs[this.state.pageIndex];
-        const eventArray = clonedEventSeq.event;
-        // replace event
-        const replaceIndex = eventArray.findIndex(e => e.id === newEvent.id);
-        eventArray.splice(replaceIndex, 1, newEvent);
+    private onDeleteEvent = (target: IEventBase) => {
+        this.updateEvent(target, (e, arr) => arr.filter(a => a.id !== e.id));
+    }
+
+    private onSubmitEdit = (event: IEventBase) => {
+        this.updateEvent(event, (e, arr) => {
+            const replaceIndex = arr.findIndex(e => e.id === e.id);
+            arr.splice(replaceIndex, 1, e);
+            return arr;
+        });
         this.setState({ 
-            targetEvent: cloned,
             showEventEditWindow: false,
         });
     }
 
     private addEvent = (event: IEventBase) => {
-        const cloned = Clone(this.state.targetEvent);
-        const newEvent = cloned.eventSeqs[this.state.pageIndex];
-        newEvent.event.push(event);
-        this.setState({ targetEvent: cloned });
+        this.updateEvent(event,
+            (e, arr) => {
+                arr.push(e);
+                return arr;
+            });
+    }
+
+    private updateEvent = 
+        (event: IEventBase,
+            procedure: (e: IEventBase, arr: IEventBase[]) => IEventBase[]) => {
+            const { pageIndex } = this.state;
+            const cloned = Clone(this.state.targetEvent);
+            const targetArray = Clone(cloned.eventSeqs[pageIndex].event);
+            cloned.eventSeqs[pageIndex].event = procedure(event, targetArray);
+            this.setState({ targetEvent: cloned });
     }
 }
