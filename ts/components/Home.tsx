@@ -61,6 +61,10 @@ class Home extends React.Component<IMap, HomeState> {
         this.setState({ shown: false });
     }
 
+    private onSubmit = (edited: IEventObject): void => {
+        this.setState({ shown: false });
+    }
+
     private callWindow = (target: IEventObject) => {
         this.setState({ nowTargetEvent: target, shown: true });
     }
@@ -72,6 +76,7 @@ class Home extends React.Component<IMap, HomeState> {
             <EventEditWindow
                 nowTarget={nowTargetEvent}
                 onClose={this.closeOverlay}
+                onSubmit={this.onSubmit}
             />
         );
     }

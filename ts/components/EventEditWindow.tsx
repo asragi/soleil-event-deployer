@@ -17,6 +17,7 @@ const GrayBack = GrayBackPrototype($OverlayWindowBack);
 interface IProps {
     nowTarget: IEventObject;
     onClose: () => void;
+    onSubmit: (e: IEventObject) => void;
 }
 
 interface ILocalState {
@@ -68,7 +69,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
 
 //#region EventWindow
     private onSubmit = () => {
-
+        this.props.onSubmit(this.state.targetEvent);
     }
 
     private onClickPlus = () => {
