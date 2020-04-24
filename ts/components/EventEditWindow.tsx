@@ -16,7 +16,7 @@ const GrayBack = GrayBackPrototype($OverlayWindowBack);
 
 interface IProps {
     nowTarget: IEventObject;
-    onClose?: () => void;
+    onClose: () => void;
 }
 
 interface ILocalState {
@@ -37,20 +37,22 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             targetEvent: Clone(props.nowTarget),
             pageIndex: 0,
         };
-        console.log('INITIALIZE');
     }
 
     public render() {
+        const { onClose } = this.props;
         const { targetEvent, showCreateWindow } = this.state;
         return (
             <>
-                <GrayBack onClick={this.onClickGray} />
+                <GrayBack />
                 <EventWindow
                     target={targetEvent}
                     onClickAdd={this.onClickPlus}
                     onStartEdit={this.onStartEditEvent}
                     onDelete={this.onDeleteEvent}
-                    onCopy={this.onCopyEvent} />
+                    onCopy={this.onCopyEvent}
+                    onCancel={onClose}
+                    onSubmit={this.onSubmit} />
                 <EventCreateWindow
                     shown={showCreateWindow}
                     onDecide={this.onDecideEvent}
@@ -64,15 +66,13 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
         );
     }
 
-    private onClickGray = (): void => {
-        const { onClose } = this.props;
-        !!onClose && onClose();
+//#region EventWindow
+    private onSubmit = () => {
+
     }
 
-    private onDecideEvent = (type: EventType) => {
-        const newEvent = InitialEvent(type);
-        this.addEvent(newEvent);
-        this.onStartEditEvent(newEvent);
+    private onClickPlus = () => {
+        this.setState({ showCreateWindow: true });
     }
 
     private onStartEditEvent = (event: IEventBase) => {
@@ -81,14 +81,6 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             showEventEditWindow: true,
             editingEvent: event,
         });
-    }
-
-    private onClickPlus = () => {
-        this.setState({ showCreateWindow: true });
-    }
-
-    private onCancelEdit = () => {
-        this.setState({ showEventEditWindow: false });
     }
 
     private onDeleteEvent = (target: IEventBase) => {
@@ -105,7 +97,17 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             return arr;
         });
     }
+//#endregion
 
+//#region EventCreate
+    private onDecideEvent = (type: EventType) => {
+        const newEvent = InitialEvent(type);
+        this.addEvent(newEvent);
+        this.onStartEditEvent(newEvent);
+    }
+//#endregion
+
+//#region EventEdit
     private onSubmitEdit = (event: IEventBase) => {
         this.updateEvent(event, (e, arr) => {
             const replaceIndex = arr.findIndex(a => a.id === e.id);
@@ -117,6 +119,12 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
         });
     }
 
+    private onCancelEdit = () => {
+        this.setState({ showEventEditWindow: false });
+    }
+//#endregion
+
+//#region private func
     private addEvent = (event: IEventBase) => {
         this.updateEvent(event,
             (e, arr) => {
@@ -135,3 +143,4 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             this.setState({ targetEvent: cloned });
     }
 }
+//#endregion
