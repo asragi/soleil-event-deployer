@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 import ScrollBooster from 'scrollbooster';
 import { $DAWN_LIGHT_GOLD } from './FoundationStyles';
 import { MapContent } from './MapContent';
-import { IMap, IEventObject } from 'ts/states/IEvent';
+import { IMap, IEventObject, IPos } from 'ts/states/IEvent';
 
 // context menu
 import ContextMenu from './ContextMenu';
@@ -24,12 +24,14 @@ interface IProps {
     map: IMap;
     mapImg: string;
     callWindow: (target: IEventObject) => void;
+    onCreateObj: (pos: IPos) => void;
 }
 
 interface IState {
     showContext: boolean;
     contextX: number;
     contextY: number;
+    objPos: IPos;
 }
 
 export class MapDisplay extends React.Component<IProps, IState> {
@@ -39,6 +41,7 @@ export class MapDisplay extends React.Component<IProps, IState> {
             showContext: false,
             contextX: 0,
             contextY: 0,
+            objPos: { x:0, y:0 },
         };
     }
 
@@ -67,11 +70,7 @@ export class MapDisplay extends React.Component<IProps, IState> {
     private renderContext = (show: boolean) => {
         if (!show) return null;
         const { contextX, contextY } = this.state;
-        const options = [
-            { label: 'イベント:新規作成', action:() => console.log('hoge')},
-            { label: 'マップ設定の編集', action:() => console.log('hoge')},
-            { label: 'ディスクのフォーマット', action:() => console.log('hoge')},
-        ];
+        const options = this.makeOptions();
         return <ContextMenu 
             depth={$MapContextMenu} depthBack={$MapContextMenuBack}
             x={contextX} y={contextY} options={options}
@@ -87,6 +86,18 @@ export class MapDisplay extends React.Component<IProps, IState> {
             showContext: true,
             contextX: e.clientX,
             contextY: e.clientY,
+            objPos: {x, y},
         });
+    }
+
+    private makeOptions = () => {
+        return [
+            { label: 'イベント:新規作成', action: this.oCreateEvent},
+        ];
+    }
+
+    private oCreateEvent = () => {
+        this.setState({showContext: false});
+        this.props.onCreateObj(this.state.objPos);
     }
 }

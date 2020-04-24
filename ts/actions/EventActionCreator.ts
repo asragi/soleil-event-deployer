@@ -5,6 +5,8 @@ import {
     IUpdateEventAction,
     SHOW_EVENTS,
     IShowEventAction,
+    ADD_EVENT_OBJ,
+    IAddEventObjAction,
     TOGGLE_SHOWN_SPINNER,
     IToggleShownSpinnerAction,
  } from './EventActions';
@@ -25,6 +27,14 @@ export const createShowMapAction =
         type: SHOW_EVENTS,
     };
 };
+
+export const createAddEventObjAction =
+    (eventObject: IEventObject): IAddEventObjAction => {
+    return {
+        eventObject,
+        type: ADD_EVENT_OBJ,
+    };
+}
 
 export const createLoadEventsAction =
     (dispatch: Dispatch, data: IEventObject[])

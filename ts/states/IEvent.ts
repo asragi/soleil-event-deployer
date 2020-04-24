@@ -46,17 +46,13 @@ export const initMap: IMap = {
     eventObjs: [],
 };
 
-export const createEventObject = (
-    type: string,
-    name: string,
-    pos: IPos,
-    eventSeqs: IEvent[],
-): IEventObject => {
+export const createEventObject = (pos: IPos): IEventObject => {
+    const id = UUID();
     return {
-        id: UUID(),
-        type,
-        name,
+        id,
+        type: 'none',
+        name: id.substring(0, 6),
         pos,
-        eventSeqs,
+        eventSeqs: [],
     };
 };

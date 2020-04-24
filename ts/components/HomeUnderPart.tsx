@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { MapEventList } from './MapEventList';
 import { MapDisplay } from './MapDisplay';
-import { IMap, IEventObject } from '../states/IEvent';
+import { IMap, IEventObject, IPos } from '../states/IEvent';
 
 // #region styled
 const Container = Styled.div`
@@ -15,6 +15,7 @@ interface IProps {
     map: IMap;
     mapImg: string;
     callWindow: (target: IEventObject) => void;
+    onCreateObj: (pos: IPos) => void;
 }
 
 export class HomeUnderPart extends React.Component<IProps, {}> {
@@ -23,7 +24,9 @@ export class HomeUnderPart extends React.Component<IProps, {}> {
         return(
             <Container>
                 <MapEventList eventObjs={map.eventObjs} />
-                <MapDisplay map={map} mapImg={mapImg} callWindow={this.props.callWindow}/>
+                <MapDisplay
+                    map={map} onCreateObj={this.props.onCreateObj}
+                    mapImg={mapImg} callWindow={this.props.callWindow}/>
             </Container>
         );
     }

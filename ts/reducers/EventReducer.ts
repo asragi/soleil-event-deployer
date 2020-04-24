@@ -24,6 +24,13 @@ a2RMapper.addWork<Action.IUpdateEventAction>(
     }
 );
 
+a2RMapper.addWork<Action.IAddEventObjAction>(
+    Action.ADD_EVENT_OBJ,
+    (state, action) => {
+        state.eventObjs.push(action.eventObject);
+    }
+)
+
 export const EventReducer: Redux.Reducer<IMap> = (state = initMap, action) => {
     return a2RMapper.execute(state, action);
 };

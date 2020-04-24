@@ -6,10 +6,13 @@ import { IState } from '../IStore';
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
 import { EventEditWindow } from './EventEditWindow';
-import { IMap, IEventObject } from '../states/IEvent';
+import { IMap, IEventObject, IPos, createEventObject } from '../states/IEvent';
 // dispatch
 import store from '../Store';
-import { createUpdateEventAction } from '../actions/EventActionCreator';
+import {
+    createUpdateEventAction,
+    createAddEventObjAction,
+} from '../actions/EventActionCreator';
 
 //#region styled
 const HomeContainer = Styled.div`
@@ -50,7 +53,8 @@ class Home extends React.Component<IMap, HomeState> {
                         <CommandList onLoadImg={ this.onLoadImg }/>
                         <HomeUnderPart
                             map={this.props} mapImg={this.state.mapImg}
-                            callWindow={this.callWindow} />
+                            callWindow={this.callWindow}
+                            onCreateObj={this.onCreateEvent} />
                     </ShowContent>
                 </HomeContainer>
             </>
@@ -72,6 +76,14 @@ class Home extends React.Component<IMap, HomeState> {
 
     private callWindow = (target: IEventObject) => {
         this.setState({ nowTargetEvent: target, shown: true });
+    }
+
+    private onCreateEvent = (pos: IPos) => {
+        const newEvent = createEventObject(pos);
+        // update store
+        store.dispatch(createAddEventObjAction(newEvent));
+        // display window
+        this.setState({ nowTargetEvent: newEvent, shown: true });
     }
 
     private renderEditWindow = () => {
