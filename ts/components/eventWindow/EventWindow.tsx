@@ -5,6 +5,7 @@ import { Header } from './Header';
 import { EventDescription } from './EventDescription';
 import { $OverlayWindow } from '../../utils/DepthNum';
 import { CenterWindow } from '../GeneralComponent';
+import Footer from '../DecideButton';
 
 const WindowBack = Styled(CenterWindow(30, $OverlayWindow))`
     display: flex;
@@ -31,6 +32,7 @@ export class EventWindow extends React.Component<IProps, {}> {
                     onStartEdit={onStartEdit}
                     onDelete={onDelete}
                     onCopy={onCopy} />
+                <Footer onCancel={() => {}} onSubmit={() => {}} />
             </WindowBack>
         );
     }

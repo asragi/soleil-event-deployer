@@ -1,7 +1,7 @@
 import React from 'react';
 import Clone from 'clone';
 import Styled from 'styled-components';
-import Footer from './Footer';
+import Footer from '../../DecideButton';
 import { CenterWindow } from '../../GeneralComponent';
 import { $NewEventWindow } from '../../../utils/DepthNum';
 import { IEventBase } from '../../../states/IEvent';
