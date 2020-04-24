@@ -2,10 +2,10 @@ import FsEx from "fs-extra";
 import OS from 'os';
 import Path from 'path';
 
-import { ITask } from '../states/ITask';
 
 const dataFilePath = Path.join(OS.homedir(), 'todo.json');
 
+/*
 export const loadTask = async () => {
     const exist = await FsEx.pathExists(dataFilePath);
     if (!exist) {
@@ -41,3 +41,4 @@ const setTimeoutPromise = (count: number) => {
         setTimeout(() => { resolve(); }, count);
     });
 };
+*/
