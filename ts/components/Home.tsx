@@ -67,10 +67,10 @@ class Home extends React.Component<IMap, HomeState> {
 
     private renderEditWindow = () => {
         const { shown, nowTargetEvent } = this.state;
-        if (!nowTargetEvent) return null;
+        if (!nowTargetEvent || !shown) return null;
         return (
             <EventEditWindow
-                shown={shown} nowTarget={nowTargetEvent}
+                nowTarget={nowTargetEvent}
                 onClose={this.closeOverlay}
             />
         );

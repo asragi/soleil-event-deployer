@@ -15,7 +15,6 @@ import { EventBaseEdit } from './eventWindow/EventBaseEdit/EventBaseEdit';
 const GrayBack = GrayBackPrototype($OverlayWindowBack);
 
 interface IProps {
-    shown: boolean;
     nowTarget: IEventObject;
     onClose?: () => void;
 }
@@ -38,14 +37,11 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             targetEvent: Clone(props.nowTarget),
             pageIndex: 0,
         };
+        console.log('INITIALIZE');
     }
 
     public render() {
-        const { shown } = this.props;
         const { targetEvent, showCreateWindow } = this.state;
-        if (!shown) {
-            return null;
-        }
         return (
             <>
                 <GrayBack onClick={this.onClickGray} />
