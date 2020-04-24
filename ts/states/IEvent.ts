@@ -1,6 +1,7 @@
 import { v4 as UUID } from 'uuid';
 
 export interface IEventObject {
+    id: string;
     type: string;
     name: string;
     pos: IPos;
@@ -52,6 +53,7 @@ export const createEventObject = (
     eventSeqs: IEvent[],
 ): IEventObject => {
     return {
+        id: UUID(),
         type,
         name,
         pos,

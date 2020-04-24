@@ -1,12 +1,22 @@
 import { Dispatch, Store } from 'redux';
+import { IState } from '../IStore';
 import {
+    UPDATE_EVENT,
+    IUpdateEventAction,
     SHOW_EVENTS,
     IShowEventAction,
     TOGGLE_SHOWN_SPINNER,
     IToggleShownSpinnerAction,
  } from './EventActions';
-import { openDataFolder } from '../utils/OpenMapFolder';
-import { IEventObject } from '../states/IEvent';
+import { IEventObject} from '../states/IEvent';
+
+export const createUpdateEventAction =
+    (eventObject: IEventObject): IUpdateEventAction => {
+        return {
+            eventObject,
+            type: UPDATE_EVENT,
+        };
+    };
 
 export const createShowMapAction =
     (objs: IEventObject[]): IShowEventAction => {
@@ -28,4 +38,4 @@ export const createLoadEventsAction =
         return {
             type: TOGGLE_SHOWN_SPINNER,
         }
-}
+};

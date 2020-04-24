@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Styled from 'styled-components';
+import { IState } from '../IStore';
+// component
 import { CommandList } from './CommandList';
 import { HomeUnderPart } from './HomeUnderPart';
 import { EventEditWindow } from './EventEditWindow';
 import { IMap, IEventObject } from '../states/IEvent';
-import { IState } from '../IStore';
+// dispatch
+import store from '../Store';
+import { createUpdateEventAction } from '../actions/EventActionCreator';
 
 //#region styled
 const HomeContainer = Styled.div`
@@ -63,6 +67,7 @@ class Home extends React.Component<IMap, HomeState> {
 
     private onSubmit = (edited: IEventObject): void => {
         this.setState({ shown: false });
+        store.dispatch(createUpdateEventAction(edited));
     }
 
     private callWindow = (target: IEventObject) => {
