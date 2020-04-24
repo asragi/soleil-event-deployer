@@ -7,6 +7,8 @@ import {
     IShowEventAction,
     ADD_EVENT_OBJ,
     IAddEventObjAction,
+    DELETE_EVENT_OBJ,
+    IDeleteEventObjAction,
     TOGGLE_SHOWN_SPINNER,
     IToggleShownSpinnerAction,
  } from './EventActions';
@@ -34,6 +36,14 @@ export const createAddEventObjAction =
         eventObject,
         type: ADD_EVENT_OBJ,
     };
+}
+
+export const createDeleteEventObjAction =
+    (eventObject: IEventObject): IDeleteEventObjAction => {
+        return {
+            eventObject,
+            type: DELETE_EVENT_OBJ,
+        }
 }
 
 export const createLoadEventsAction =

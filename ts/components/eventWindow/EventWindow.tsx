@@ -12,6 +12,7 @@ const WindowBack = Styled(CenterWindow(30, $OverlayWindow))`
     flex-direction: column;
 `;
 
+// TODO: コールバック地獄をなんとかできないか
 interface IProps {
     target: IEventObject;
     onClickAdd: () => void;
@@ -20,16 +21,17 @@ interface IProps {
     onCopy: (e: IEventBase) => void;
     onSubmit: () => void;
     onCancel: () => void;
+    onDeleteObj: () => void;
 }
 
 export class EventWindow extends React.Component<IProps, {}> {
     public render() {
         const {
             target, onClickAdd, onStartEdit, onDelete, onCopy,
-            onCancel, onSubmit } = this.props;
+            onCancel, onSubmit, onDeleteObj } = this.props;
         return (
             <WindowBack>
-                <Header target={target} />
+                <Header target={target} onDelete={onDeleteObj}/>
                 <EventDescription
                     target={target}
                     onClickAdd={onClickAdd}

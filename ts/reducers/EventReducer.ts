@@ -31,6 +31,14 @@ a2RMapper.addWork<Action.IAddEventObjAction>(
     }
 )
 
+a2RMapper.addWork<Action.IDeleteEventObjAction>(
+    Action.DELETE_EVENT_OBJ,
+    (state, action) => {
+        const target = action.eventObject;
+        state.eventObjs = state.eventObjs.filter(e => e.id !== target.id);
+    }
+);
+
 export const EventReducer: Redux.Reducer<IMap> = (state = initMap, action) => {
     return a2RMapper.execute(state, action);
 };

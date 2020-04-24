@@ -18,6 +18,7 @@ interface IProps {
     nowTarget: IEventObject;
     onClose: () => void;
     onSubmit: (e: IEventObject) => void;
+    onDeleteObj: (e: IEventObject) => void;
 }
 
 interface ILocalState {
@@ -41,7 +42,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
     }
 
     public render() {
-        const { onClose } = this.props;
+        const { onClose, onDeleteObj } = this.props;
         const { targetEvent, showCreateWindow } = this.state;
         return (
             <>
@@ -53,7 +54,8 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
                     onDelete={this.onDeleteEvent}
                     onCopy={this.onCopyEvent}
                     onCancel={onClose}
-                    onSubmit={this.onSubmit} />
+                    onSubmit={this.onSubmit}
+                    onDeleteObj={() => onDeleteObj(targetEvent)} />
                 <EventCreateWindow
                     shown={showCreateWindow}
                     onDecide={this.onDecideEvent}

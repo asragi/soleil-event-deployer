@@ -17,5 +17,10 @@ export interface IAddEventObjAction extends Action {
     eventObject: IEventObject;
 }
 
+export const DELETE_EVENT_OBJ = UUID();
+export interface IDeleteEventObjAction extends Action {
+    eventObject: IEventObject;
+}
+
 export const TOGGLE_SHOWN_SPINNER = UUID();
 export interface IToggleShownSpinnerAction extends Action { }

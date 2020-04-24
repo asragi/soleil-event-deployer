@@ -12,6 +12,7 @@ import store from '../Store';
 import {
     createUpdateEventAction,
     createAddEventObjAction,
+    createDeleteEventObjAction,
 } from '../actions/EventActionCreator';
 
 //#region styled
@@ -86,6 +87,12 @@ class Home extends React.Component<IMap, HomeState> {
         this.setState({ nowTargetEvent: newEvent, shown: true });
     }
 
+    private onDeleteObject = (obj: IEventObject) => {
+        if(!confirm('このイベントを削除しますか？')) return;
+        store.dispatch(createDeleteEventObjAction(obj));
+        this.setState({ shown: false });
+    }
+
     private renderEditWindow = () => {
         const { shown, nowTargetEvent } = this.state;
         if (!nowTargetEvent || !shown) return null;
@@ -94,6 +101,7 @@ class Home extends React.Component<IMap, HomeState> {
                 nowTarget={nowTargetEvent}
                 onClose={this.closeOverlay}
                 onSubmit={this.onSubmit}
+                onDeleteObj={this.onDeleteObject}
             />
         );
     }
