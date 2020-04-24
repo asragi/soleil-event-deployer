@@ -96,6 +96,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
     }
 
     private onDeleteEvent = (target: IEventBase) => {
+        if (!confirm(`イベント${target.content}を削除しますか？`)) return;
         this.updateEvent(target, (e, arr) => arr.filter(a => a.id !== e.id));
     }
 

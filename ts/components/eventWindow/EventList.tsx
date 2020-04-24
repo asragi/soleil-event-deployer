@@ -69,7 +69,7 @@ export class EventList extends React.Component<IProps, {}> {
             elm => {
                 return (
                     <LiElement key={elm.id} onClick={() => onStartEdit(elm)}>
-                        <LiText>{`${elm.type}:${elm.content}:${elm.id}`}</LiText>
+                        <LiText>{`${elm.type}:${elm.content}`}</LiText>
                         <OpeButton onClick={(e) => this.PreventExec(e, elm, onCopy)}>
                             <Image src={copyImg}/>
                         </OpeButton>
