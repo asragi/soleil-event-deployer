@@ -12,14 +12,15 @@ const Container = Styled.div`
 interface IProps{
     map: IMap;
     base64src: string;
+    onTouch: (e: React.MouseEvent) => void;
     callWindow: (target :IEventObject) => void;
 }
 
 export class MapContent extends React.Component<IProps, {}> {
     public render() {
-        const { base64src, map, callWindow } = this.props;
+        const { base64src, map, callWindow, onTouch } = this.props;
         return(
-            <Container>
+            <Container onClick={onTouch}>
                 { this.renderMap(base64src) }
                 <MapEventField map={map} callWindow={callWindow}/>
             </Container>

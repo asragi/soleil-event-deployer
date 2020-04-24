@@ -49,10 +49,16 @@ export class MapDisplay extends React.Component<IProps, IState> {
         const renderDoms = (
             <ViewPort id={'viewport'}>
                 <MapContent
-                    base64src={mapImg} map={map}
+                    base64src={mapImg} map={map} onTouch={this.onTouch}
                     callWindow={this.props.callWindow} />
             </ViewPort>
         );
         return(renderDoms);
+    }
+
+    private onTouch = (e: React.MouseEvent) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX - rect.x;
+        const y = e.clientY - rect.y;
     }
 }
