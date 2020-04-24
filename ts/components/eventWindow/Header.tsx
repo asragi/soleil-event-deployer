@@ -1,5 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { BoxButton, Image } from '../GeneralComponent';
+import deleteImg from '../icons/trash.png';
 import { IEventObject } from '../../states/IEvent';
 
 const Container = Styled.div`
@@ -11,6 +13,12 @@ const Container = Styled.div`
 const NameBox = Styled.input`
     width: 140px;
     margin: 10px;
+`;
+const Empty = Styled.div`
+    flex-grow: 1;
+`;
+const DeleteButton = Styled(BoxButton)`
+    margin: 5px;
 `;
 
 interface IProps {
@@ -33,6 +41,10 @@ export class Header extends React.Component<IProps, ILocalState> {
         return (
             <Container>
                 <NameBox value={this.state.name} onChange={this.onChangeName}/>
+                <Empty />
+                <DeleteButton>
+                    <Image src={deleteImg} />
+                </DeleteButton>
             </Container>
         );
     }

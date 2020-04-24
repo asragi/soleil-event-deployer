@@ -39,10 +39,3 @@ export const GlobalStyle = createGlobalStyle`
 
 export const $COLOR_PRIMARY_0 = '#723FBD';  // MAIN PRIMARY COLOR */
 export const $COLOR_PRIMARY_1 = '#AE8CE2';
-export const $COLOR_PRIMARY_3 = '#5A21AF';
-
-export const $COLOR_SECONDARY_1_3 = '#12A785';
-
-export const $COLOR_SECONDARY_2_0 = '#FF5644';  // MAIN SECONDARY COLOR (2) */
-
-export const $COLOR_FOREGROUND_REVERSE = '#fff';
