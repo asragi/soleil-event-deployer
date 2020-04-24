@@ -1,4 +1,7 @@
 // z-indexの定数を一元管理するためのmodule
+export const $MapContextMenuBack = 2;
+export const $MapContextMenu = 3;
+
 export const $OverlayWindowBack = 10;
 export const $OverlayWindow = 11;
 

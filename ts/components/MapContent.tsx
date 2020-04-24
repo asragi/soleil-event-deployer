@@ -20,7 +20,7 @@ export class MapContent extends React.Component<IProps, {}> {
     public render() {
         const { base64src, map, callWindow, onTouch } = this.props;
         return(
-            <Container onClick={onTouch}>
+            <Container onContextMenu={onTouch}>
                 { this.renderMap(base64src) }
                 <MapEventField map={map} callWindow={callWindow}/>
             </Container>
