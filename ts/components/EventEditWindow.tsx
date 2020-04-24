@@ -139,8 +139,9 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
             procedure: (e: IEventBase, arr: IEventBase[]) => IEventBase[]) => {
             const { pageIndex } = this.state;
             const cloned = Clone(this.state.targetEvent);
-            const targetArray = Clone(cloned.eventSeqs[pageIndex].event);
-            cloned.eventSeqs[pageIndex].event = procedure(event, targetArray);
+            const targetEventSeq = cloned.eventSeqs[pageIndex];
+            const targetArray = !!targetEventSeq ? Clone(targetEventSeq.event) : [];
+            cloned.eventSeqs[pageIndex] = { event: procedure(event, targetArray) };
             this.setState({ targetEvent: cloned });
     }
 }
