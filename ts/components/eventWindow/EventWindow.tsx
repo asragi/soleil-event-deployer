@@ -16,6 +16,7 @@ const WindowBack = Styled(CenterWindow(30, $OverlayWindow))`
 interface IProps {
     target: IEventObject;
     onClickAdd: () => void;
+    onChangeName: (n: string) => void;
     onStartEdit: (e: IEventBase) => void;
     onDelete: (e: IEventBase) => void;
     onCopy: (e: IEventBase) => void;
@@ -27,11 +28,14 @@ interface IProps {
 export class EventWindow extends React.Component<IProps, {}> {
     public render() {
         const {
-            target, onClickAdd, onStartEdit, onDelete, onCopy,
+            target, onChangeName, onClickAdd, onStartEdit, onDelete, onCopy,
             onCancel, onSubmit, onDeleteObj } = this.props;
         return (
             <WindowBack>
-                <Header target={target} onDelete={onDeleteObj}/>
+                <Header
+                    target={target}
+                    onDelete={onDeleteObj}
+                    onChangeName={onChangeName}/>
                 <EventDescription
                     target={target}
                     onClickAdd={onClickAdd}

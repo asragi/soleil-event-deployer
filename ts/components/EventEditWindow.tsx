@@ -33,10 +33,11 @@ interface ILocalState {
 export class EventEditWindow extends React.Component<IProps, ILocalState> {
     public constructor(props: IProps) {
         super(props);
+        const target = Clone(props.nowTarget);
         this.state = {
             showCreateWindow: false,
             showEventEditWindow: false,
-            targetEvent: Clone(props.nowTarget),
+            targetEvent: target,
             pageIndex: 0,
         };
     }
@@ -50,6 +51,7 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
                 <EventWindow
                     target={targetEvent}
                     onClickAdd={this.onClickPlus}
+                    onChangeName={this.onChangeName}
                     onStartEdit={this.onStartEditEvent}
                     onDelete={this.onDeleteEvent}
                     onCopy={this.onCopyEvent}
@@ -72,6 +74,12 @@ export class EventEditWindow extends React.Component<IProps, ILocalState> {
 //#region EventWindow
     private onSubmit = () => {
         this.props.onSubmit(this.state.targetEvent);
+    }
+
+    private onChangeName = (name: string) => {
+        const tmp = Clone(this.state.targetEvent);
+        tmp.name = name;
+        this.setState({ targetEvent: tmp });
     }
 
     private onClickPlus = () => {

@@ -27,28 +27,19 @@ const DeleteButton = Styled(BoxButton)`
 
 interface IProps {
     target: IEventObject;
+    onChangeName: (s : string) => void;
     onDelete: () => void;
 }
 
-interface ILocalState {
-    name: string;
-}
-
-export class Header extends React.Component<IProps, ILocalState> {
-    public constructor(props: IProps) {
-        super(props);
-        this.state = {
-            name: props.target.name,
-        };
-    }
-
+export class Header extends React.Component<IProps, {}> {
     public render() {
+        const { target, onDelete } = this.props;
         return (
             <Container>
                 {'Name'}
-                <NameBox value={this.state.name} onChange={this.onChangeName}/>
+                <NameBox value={target.name} onChange={this.onChangeName}/>
                 <Empty />
-                <DeleteButton onClick={this.props.onDelete}>
+                <DeleteButton onClick={onDelete}>
                     <Image src={deleteImg} />
                 </DeleteButton>
             </Container>
@@ -56,6 +47,6 @@ export class Header extends React.Component<IProps, ILocalState> {
     }
 
     private onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState( {name: e.target.value} );
+        this.props.onChangeName(e.target.value);
     }
 }
