@@ -36,7 +36,6 @@ export class Header extends React.Component<IProps, {}> {
         const { target, onDelete } = this.props;
         return (
             <Container>
-                {'Name'}
                 <NameBox value={target.name} onChange={this.onChangeName}/>
                 <Empty />
                 <DeleteButton onClick={onDelete}>
