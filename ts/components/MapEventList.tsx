@@ -1,7 +1,7 @@
 import React from 'react'
 import Styled from 'styled-components'
 import { EventDesc } from './EventDesc';
-import { IMap } from '../states/IEvent';
+import { IMap, IEventObject } from '../states/IEvent';
 
 //#region
 const EList = Styled.div`
@@ -13,7 +13,11 @@ const EList = Styled.div`
 `;
 //#endregion
 
-export class MapEventList extends React.Component<IMap, {}> {
+interface IProps {
+    eventObjs: IEventObject[];
+}
+
+export class MapEventList extends React.Component<IProps, {}> {
     public render() {
         const { eventObjs } = this.props;
         const eventDescList = eventObjs.map((it) => {

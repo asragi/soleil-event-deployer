@@ -24,3 +24,8 @@ export interface IDeleteEventObjAction extends Action {
 
 export const TOGGLE_SHOWN_SPINNER = UUID();
 export interface IToggleShownSpinnerAction extends Action { }
+
+export const UPDATE_FOLDER_PATH = UUID();
+export interface IUpdateFolderPath extends Action {
+    folderPath: string;
+}

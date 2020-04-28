@@ -39,6 +39,13 @@ a2RMapper.addWork<Action.IDeleteEventObjAction>(
     }
 );
 
+a2RMapper.addWork<Action.IUpdateFolderPath>(
+    Action.UPDATE_FOLDER_PATH,
+    (state, action) => {
+        state.folderPath = action.folderPath;
+    }
+);
+
 export const EventReducer: Redux.Reducer<IMap> = (state = initMap, action) => {
     return a2RMapper.execute(state, action);
 };

@@ -40,10 +40,12 @@ export const InitialEvent = (type: string): IEventBase => {
 
 export interface IMap {
     eventObjs: IEventObject[];
+    folderPath: string;
 }
 
 export const initMap: IMap = {
     eventObjs: [],
+    folderPath: '',
 };
 
 export const createEventObject = (pos: IPos): IEventObject => {

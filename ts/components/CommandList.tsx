@@ -2,7 +2,9 @@ import React from 'react'
 import Styled from 'styled-components'
 import { CommandIcon } from './CommandIcon';
 import store from '../Store';
-import { createLoadEventsAction } from '../actions/EventActionCreator';
+import {
+    createLoadEventsAction,
+    createUpdateFolderPathAction } from '../actions/EventActionCreator';
 import { openDataFolder, createMapFromImg } from '../utils/OpenMapFolder';
 import newfile from './icons/newfile.png';
 import openfile from './icons/openfile.png';
@@ -42,19 +44,16 @@ export class CommandList extends React.Component<IProps, {}> {
         }
         const mapData = await createMapFromImg();
         if (!mapData) return;
-        store.dispatch(createLoadEventsAction(store.dispatch, mapData.map));
-        !!onLoadImg && onLoadImg(mapData.mapImg);
+        this.onLoadComplete(mapData, this.props.onLoadImg);
     }
 
     private LoadData = async () => {
-        const { onLoadImg } = this.props;
         const folderData = await openDataFolder();
         if (!folderData) {
             alert('Cannot load file!');
             return;
         }
-        store.dispatch(createLoadEventsAction(store.dispatch, folderData.map));
-        !!onLoadImg && onLoadImg(folderData.mapImg);
+        this.onLoadComplete(folderData, this.props.onLoadImg);
     }
 
     private SaveAsSameFile = () => {
@@ -63,5 +62,11 @@ export class CommandList extends React.Component<IProps, {}> {
 
     private SaveAsExec = () => {
 
+    }
+
+    private onLoadComplete = (mapData: any, onLoadImg?: (s: string) => void) => {
+        store.dispatch(createLoadEventsAction(store.dispatch, mapData.map));
+        store.dispatch(createUpdateFolderPathAction(mapData.fullPath));
+        !!onLoadImg && onLoadImg(mapData.mapImg);
     }
 }

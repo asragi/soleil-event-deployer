@@ -1,5 +1,4 @@
-import { Dispatch, Store } from 'redux';
-import { IState } from '../IStore';
+import { Dispatch } from 'redux';
 import {
     UPDATE_EVENT,
     IUpdateEventAction,
@@ -11,6 +10,8 @@ import {
     IDeleteEventObjAction,
     TOGGLE_SHOWN_SPINNER,
     IToggleShownSpinnerAction,
+    UPDATE_FOLDER_PATH,
+    IUpdateFolderPath,
  } from './EventActions';
 import { IEventObject} from '../states/IEvent';
 
@@ -59,3 +60,11 @@ export const createLoadEventsAction =
             type: TOGGLE_SHOWN_SPINNER,
         }
 };
+
+export const createUpdateFolderPathAction =
+    (folderPath: string): IUpdateFolderPath => {
+        return {
+            type: UPDATE_FOLDER_PATH,
+            folderPath,
+        };
+    };

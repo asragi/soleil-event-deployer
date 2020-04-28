@@ -40,7 +40,7 @@ const readDataFromPath = (fullPath: string) => {
 
     const eventObjects = readYaml(path.join(fullPath, mapDataYamlName));
     const base64img = readImg(path.join(fullPath, mapImgName));
-    return { map: eventObjects, mapImg: base64img};
+    return { map: eventObjects, mapImg: base64img, fullPath: fullPath};
 }
 
 const readYaml = (filePath: string) : IEventObject[] => {
