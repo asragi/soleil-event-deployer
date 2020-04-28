@@ -43,6 +43,14 @@ const readDataFromPath = (fullPath: string) => {
     return { map: eventObjects, mapImg: base64img, fullPath: fullPath};
 }
 
+export const saveData = (filePath: string, data: IEventObject[]): boolean => {
+    if(!filePath || data.length == 0) return false;
+    const folderName = getFileName(filePath);
+    const dumpedData = Yaml.dump(data);
+    writeFile(path.join(filePath, folderName + EVENT_SUFFIX), dumpedData);
+    return true;
+}
+
 const readYaml = (filePath: string) : IEventObject[] => {
     // TODO: checkFileExist
     const yamlData = readFile(filePath, 'utf8');
@@ -54,4 +62,8 @@ const readImg = (filePath: string) : string => {
     // TODO: checkFileExist
     const binary = readFile(filePath);
     return new Buffer(binary).toString('base64');
+}
+
+const getFileName = (filePath: string): string => {
+    return filePath.split('/').reverse()[0];
 }

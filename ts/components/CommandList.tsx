@@ -5,7 +5,9 @@ import store from '../Store';
 import {
     createLoadEventsAction,
     createUpdateFolderPathAction } from '../actions/EventActionCreator';
-import { openDataFolder, createMapFromImg } from '../utils/OpenMapFolder';
+import {
+    openDataFolder, createMapFromImg,
+    saveData } from '../utils/OpenMapFolder';
 import newfile from './icons/newfile.png';
 import openfile from './icons/openfile.png';
 import savefile from './icons/savefile.png';
@@ -25,6 +27,8 @@ interface IProps{
 }
 
 // #endregion
+
+/** アプリ上部の「新規作成」「開く」などを表示するコンポーネント */
 export class CommandList extends React.Component<IProps, {}> {
     public render() {
         return (
@@ -38,7 +42,6 @@ export class CommandList extends React.Component<IProps, {}> {
     }
 
     private Initialize = async () => {
-        const { onLoadImg } = this.props;
         if (!confirm('編集中のデータを破棄して新規作成します')) {
             return;
         }
@@ -57,11 +60,14 @@ export class CommandList extends React.Component<IProps, {}> {
     }
 
     private SaveAsSameFile = () => {
-
+        const mapData = store.getState().map;
+        const saveSuccess = saveData(mapData.folderPath, mapData.eventObjs);
+        if(!saveSuccess) return;
+        alert('Save Complete!');
     }
 
     private SaveAsExec = () => {
-
+        alert('Not Implemented!');
     }
 
     private onLoadComplete = (mapData: any, onLoadImg?: (s: string) => void) => {
