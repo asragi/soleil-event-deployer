@@ -3,7 +3,7 @@ import Styled from 'styled-components'
 import { CommandIcon } from './CommandIcon';
 import store from '../Store';
 import { createLoadEventsAction } from '../actions/EventActionCreator';
-import { openDataFolder, decideMapImg } from '../utils/OpenMapFolder';
+import { openDataFolder, createMapFromImg } from '../utils/OpenMapFolder';
 import newfile from './icons/newfile.png';
 import openfile from './icons/openfile.png';
 import savefile from './icons/savefile.png';
@@ -36,7 +36,14 @@ export class CommandList extends React.Component<IProps, {}> {
     }
 
     private Initialize = async () => {
-        const created = await decideMapImg();
+        const { onLoadImg } = this.props;
+        if (!confirm('編集中のデータを破棄して新規作成します')) {
+            return;
+        }
+        const mapData = await createMapFromImg();
+        if (!mapData) return;
+        store.dispatch(createLoadEventsAction(store.dispatch, mapData.map));
+        !!onLoadImg && onLoadImg(mapData.mapImg);
     }
 
     private LoadData = async () => {

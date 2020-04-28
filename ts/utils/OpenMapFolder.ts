@@ -1,45 +1,47 @@
 import path from 'path';
 import * as Yaml from 'js-yaml';
-import * as fs from 'fs';
 import { openFileDialog, readFile, writeFile } from './FileDialog';
-import { IEventObject } from 'ts/states/IEvent';
+import { IEventObject, initMap } from '../states/IEvent';
 
 const EVENT_SUFFIX = 'event.yaml';
 const MAP_IMAGE_NAME = 'image.png';
 
 /** 新規マップ作成時，マップ背景画像を指定する処理． */
-export const decideMapImg = async (): Promise<Boolean> => {
+export const createMapFromImg = async () => {
     // マップ画像を選ぶ
     const imgPathRead = await openFileDialog([], ['openFile']);
-    if (!imgPathRead) return false;
+    if (!imgPathRead) return;
     const imgPath = imgPathRead.filePaths[0];
     const imgBin = readFile(imgPath);
     // 保存先フォルダを指定
     const directoryPathRead = await openFileDialog([], ['openDirectory']);
-    if (!directoryPathRead) return false;
+    if (!directoryPathRead) return;
     const folderPath = directoryPathRead.filePaths[0];
     const folderName = folderPath.split('/').reverse()[0];
     // フォルダに画像とevent.yamlを生成
     writeFile(path.join(folderPath, MAP_IMAGE_NAME), imgBin);
-    writeFile(path.join(folderPath, folderName + EVENT_SUFFIX), '');
-    return true;
+    const initMapText = Yaml.dump(initMap.eventObjs);
+    writeFile(path.join(folderPath, folderName + EVENT_SUFFIX), initMapText);
+    return readDataFromPath(folderPath);
 }
 
 /** フォルダを開いてマップイベントデータとマップ画像ファイルを返す */
 export const openDataFolder = async () => {
     const folderData = await openFileDialog([], ['openDirectory']);
-    if (!folderData) {
-        return;
-    }
+    if (!folderData) return;
     const folderPath = folderData.filePaths[0];
-    const folderName = folderPath.split('/').reverse()[0];
+    return readDataFromPath(folderPath);
+};
+
+const readDataFromPath = (fullPath: string) => {
+    const folderName = fullPath.split('/').reverse()[0];
     const mapDataYamlName = folderName + EVENT_SUFFIX;
     const mapImgName = MAP_IMAGE_NAME;
 
-    const eventObjects = readYaml(path.join(folderPath, mapDataYamlName));
-    const base64img = readImg(path.join(folderPath, mapImgName));
+    const eventObjects = readYaml(path.join(fullPath, mapDataYamlName));
+    const base64img = readImg(path.join(fullPath, mapImgName));
     return { map: eventObjects, mapImg: base64img};
-};
+}
 
 const readYaml = (filePath: string) : IEventObject[] => {
     // TODO: checkFileExist
