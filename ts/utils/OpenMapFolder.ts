@@ -9,7 +9,9 @@ const MAP_IMAGE_NAME = 'image.png';
 /** 新規マップ作成時，マップ背景画像を指定する処理． */
 export const createMapFromImg = async () => {
     // マップ画像を選ぶ
-    const imgPathRead = await openFileDialog([], ['openFile']);
+    const imgPathRead = await openFileDialog({
+        filters: [{name: 'Images', extensions: ['png']}]
+    }, ['openFile']);
     if (!imgPathRead) return;
     const imgPath = imgPathRead.filePaths[0];
     const imgBin = readFile(imgPath);
