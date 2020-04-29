@@ -4,6 +4,7 @@ import MessageEdit from './MessageEdit';
 import { GrayBackPrototype } from '../../GeneralComponent';
 import { $NewEventWindowBack } from '../../../utils/DepthNum';
 import { IEventBase } from '../../../states/IEvent';
+import InputChangeEdit from './InputChangeEdit';
 
 interface IProps {
     editingEvent?: IEventBase;
@@ -28,13 +29,13 @@ export class EventBaseEdit extends React.Component<IProps, {}> {
     }
 
     private switchWindow = (event: IEventBase): JSX.Element | null => {
-        const { onCancel, onSubmit,  } = this.props;
+        const { onCancel, onSubmit } = this.props;
         const type = event.type as EventType;
         switch (type) {
             case 'Message':
                 return <MessageEdit target={event} onCancel={onCancel} onSubmit={onSubmit} />
             case 'InputChange':
-                break;
+                return <InputChangeEdit target={event} onCancel={onCancel} onSubmit={onSubmit} />
         }
         return null;
     }
