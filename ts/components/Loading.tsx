@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Styled, { keyframes } from 'styled-components';
 import { $COLOR_PRIMARY_0, $COLOR_PRIMARY_1 } from './FoundationStyles';
-
+import { $Loading } from '../utils/DepthNum';
 interface IProps {
     shown: boolean;
 }
@@ -14,6 +14,7 @@ const BG = Styled.div`
     position: absolute;
     top: 0;
     width: 100%;
+    z-index: ${$Loading};
 `;
 
 const RoundAnimate = keyframes`
@@ -32,6 +33,7 @@ const SpinnerBox = Styled.div`
     position: absolute;
     top: 0;
     width: 100%;
+    z-index: ${$Loading};
 `;
 const Spinner = Styled.div`
     animation: ${RoundAnimate} 1.1s infinite linear;

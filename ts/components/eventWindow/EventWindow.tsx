@@ -25,6 +25,7 @@ interface IProps {
     onDeleteObj: () => void;
 }
 
+/** マップオブジェクトを編集するウィンドウの本体 */
 export class EventWindow extends React.Component<IProps, {}> {
     public render() {
         const {

@@ -10,3 +10,5 @@ export const $EventCreateWindow = 21;
 
 export const $NewEventWindowBack = 30;
 export const $NewEventWindow = 31;
+
+export const $Loading = 1000;

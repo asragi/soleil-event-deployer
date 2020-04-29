@@ -13,7 +13,8 @@ import {
     UPDATE_FOLDER_PATH,
     IUpdateFolderPath,
  } from './EventActions';
-import { IEventObject} from '../states/IEvent';
+import { IEventObject } from '../states/IEvent';
+import { createMapFromImg } from '../utils/OpenMapFolder';
 
 export const createUpdateEventAction =
     (eventObject: IEventObject): IUpdateEventAction => {
@@ -68,3 +69,23 @@ export const createUpdateFolderPathAction =
             folderPath,
         };
     };
+
+export const createNewMapSetAction =
+    (
+        dispatch: Dispatch, 
+        imgPath: string,
+        folderPath: string,
+        onLoadImg?: (img: string) => void,
+    ): IToggleShownSpinnerAction => {
+        createMapFromImg(imgPath, folderPath).then(data => {
+            onLoadImg && onLoadImg(data.mapImg);
+            dispatch(createLoadEventsAction(dispatch, data.map));
+            dispatch(createUpdateFolderPathAction(data.fullPath));
+            dispatch<IToggleShownSpinnerAction>({
+                type: TOGGLE_SHOWN_SPINNER,
+            })
+        });
+        return {
+            type: TOGGLE_SHOWN_SPINNER,
+        }
+    }

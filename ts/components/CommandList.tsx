@@ -6,8 +6,7 @@ import {
     createLoadEventsAction,
     createUpdateFolderPathAction } from '../actions/EventActionCreator';
 import {
-    openDataFolder, createMapFromImg,
-    saveData } from '../utils/OpenMapFolder';
+    openDataFolder, saveData } from '../utils/OpenMapFolder';
 import newfile from './icons/newfile.png';
 import openfile from './icons/openfile.png';
 import savefile from './icons/savefile.png';
@@ -24,6 +23,7 @@ const Container = Styled.div`
 
 interface IProps{
     onLoadImg?: (mapImg: string) => void;
+    onPushInit: () => void;
 }
 
 // #endregion
@@ -45,9 +45,7 @@ export class CommandList extends React.Component<IProps, {}> {
         if (!confirm('編集中のデータを破棄して新規作成します')) {
             return;
         }
-        const mapData = await createMapFromImg();
-        if (!mapData) return;
-        this.onLoadComplete(mapData, this.props.onLoadImg);
+        this.props.onPushInit();
     }
 
     private LoadData = async () => {

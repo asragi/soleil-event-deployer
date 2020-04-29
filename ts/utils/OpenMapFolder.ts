@@ -7,18 +7,8 @@ const EVENT_SUFFIX = 'event.yaml';
 const MAP_IMAGE_NAME = 'image.png';
 
 /** 新規マップ作成時，マップ背景画像を指定する処理． */
-export const createMapFromImg = async () => {
-    // マップ画像を選ぶ
-    const imgPathRead = await openFileDialog({
-        filters: [{name: 'Images', extensions: ['png']}]
-    }, ['openFile']);
-    if (!imgPathRead) return;
-    const imgPath = imgPathRead.filePaths[0];
+export const createMapFromImg = async (imgPath: string, folderPath: string) => {
     const imgBin = readFile(imgPath);
-    // 保存先フォルダを指定
-    const directoryPathRead = await openFileDialog([], ['openDirectory']);
-    if (!directoryPathRead) return;
-    const folderPath = directoryPathRead.filePaths[0];
     const folderName = folderPath.split('/').reverse()[0];
     // フォルダに画像とevent.yamlを生成
     writeFile(path.join(folderPath, MAP_IMAGE_NAME), imgBin);

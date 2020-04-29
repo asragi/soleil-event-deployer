@@ -46,6 +46,13 @@ a2RMapper.addWork<Action.IUpdateFolderPath>(
     }
 );
 
+a2RMapper.addWork<Action.IToggleShownSpinnerAction>(
+    Action.TOGGLE_SHOWN_SPINNER,
+    (state, _) => {
+        state.loading = !state.loading;
+    }
+);
+
 export const EventReducer: Redux.Reducer<IMap> = (state = initMap, action) => {
     return a2RMapper.execute(state, action);
 };

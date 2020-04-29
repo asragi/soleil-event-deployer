@@ -41,11 +41,13 @@ export const InitialEvent = (type: string): IEventBase => {
 export interface IMap {
     eventObjs: IEventObject[];
     folderPath: string;
+    loading: boolean;
 }
 
 export const initMap: IMap = {
     eventObjs: [],
     folderPath: '',
+    loading: false,
 };
 
 export const createEventObject = (pos: IPos): IEventObject => {
