@@ -36,7 +36,7 @@ export class CommandList extends React.Component<IProps, {}> {
                 <CommandIcon onClick={this.Initialize} src={newfile} />
                 <CommandIcon onClick={this.LoadData} src={openfile}/>
                 <CommandIcon onClick={this.SaveAsSameFile} src={savefile}/>
-                <CommandIcon onClick={this.SaveAsExec} src={savefileas}/>
+                {/* <CommandIcon onClick={this.SaveAsExec} src={savefileas}/> */}
             </Container>
         );
     }

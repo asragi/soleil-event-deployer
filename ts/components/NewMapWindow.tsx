@@ -9,12 +9,16 @@ import {
     RectButton } from './GeneralComponent';
 // components
 import Footer from './DecideButton';
-import { openFileDialog, readFile } from '../utils/FileDialog';
+import { openFileDialog } from '../utils/FileDialog';
 
 const GrayBack = GrayBackPrototype($OverlayWindowBack);
 const Window = Styled(CenterWindow(100, $OverlayWindow))`
     display: flex;
     flex-direction: column;
+    padding: 10px;
+`;
+const PathButton = Styled(RectButton)`
+    height: 32px;
 `;
 const NameLabel = Styled.div``;
 
@@ -47,9 +51,9 @@ export class NewMapWindow extends React.Component<IProps, ILocalState> {
                 <GrayBack />
                 <Window>
                     <NameLabel>{mapInfo}</NameLabel>
-                    <RectButton onClick={this.setImg}>{this.state.imgPath}</RectButton>
+                    <PathButton onClick={this.setImg}>{this.state.imgPath}</PathButton>
                     <NameLabel>{folderInfo}</NameLabel>
-                    <RectButton onClick={this.setFolder}>{this.state.folderPath}</RectButton>
+                    <PathButton onClick={this.setFolder}>{this.state.folderPath}</PathButton>
                     <Footer onCancel={onCancel} onSubmit={this.onSubmit}/>
                 </Window>
             </>
@@ -58,7 +62,10 @@ export class NewMapWindow extends React.Component<IProps, ILocalState> {
 
     private onSubmit = async () => {
         const { imgPath, folderPath } = this.state;
-        if(!imgPath || !folderPath) return;
+        if(!imgPath || !folderPath) {
+            alert('設定の指定が不十分です');
+            return;
+        }
         this.props.onSubmit(imgPath, folderPath);
     }
 

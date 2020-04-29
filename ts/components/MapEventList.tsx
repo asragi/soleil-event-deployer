@@ -21,7 +21,7 @@ export class MapEventList extends React.Component<IProps, {}> {
     public render() {
         const { eventObjs } = this.props;
         const eventDescList = eventObjs.map((it) => {
-            return ( <EventDesc id={'0'} title={it.name} /> );
+            return ( <EventDesc id={'0'} title={it.name} key={it.id} /> );
         });
 
         return (

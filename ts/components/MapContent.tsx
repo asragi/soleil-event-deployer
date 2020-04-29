@@ -49,7 +49,10 @@ class MapEventField extends React.Component<IMapButtonProps, {}> {
                     left: String(obj.pos.x) + 'px',
                 };
                 return (
-                    <button style={style} onClick={() => { callWindow(obj); }}>
+                    <button
+                        style={style}
+                        onClick={() => { callWindow(obj); }}
+                        key={obj.id}>
                         {obj.name}
                     </button>
                 );
