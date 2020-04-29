@@ -2,7 +2,7 @@ import React from 'react';
 import Clone from 'clone';
 import Styled from 'styled-components';
 import Footer from '../../DecideButton';
-import { CenterWindow } from '../../GeneralComponent';
+import { CenterWindow, Title, StyledHr } from '../../GeneralComponent';
 import { $NewEventWindow } from '../../../utils/DepthNum';
 import { IEventBase } from '../../../states/IEvent';
 
@@ -10,6 +10,11 @@ import { IEventBase } from '../../../states/IEvent';
 const WindowBack = Styled(CenterWindow(60, $NewEventWindow))`
     display: flex;
     flex-direction: column;
+`;
+const Container = Styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 `;
 const ContentInput = Styled.input`
     width: 140px;
@@ -39,8 +44,15 @@ class MessageEdit extends React.Component<IProps, LocalState> {
         const { onCancel } = this.props;
         return(
             <WindowBack>
-                {'Content'}
-                <ContentInput value={this.state.content} onChange={this.onChangeContent} />
+                <Container>
+                    <Title>{'メッセージの表示'}</Title>
+                    <StyledHr />
+                    {'Content'}
+                    <ContentInput
+                        value={this.state.content}
+                        onChange={this.onChangeContent}
+                    />
+                </Container>
                 <Footer onCancel={onCancel} onSubmit={this.onSubmit}/>
             </WindowBack>
         );

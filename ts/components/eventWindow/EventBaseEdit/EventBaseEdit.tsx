@@ -31,9 +31,9 @@ export class EventBaseEdit extends React.Component<IProps, {}> {
         const { onCancel, onSubmit,  } = this.props;
         const type = event.type as EventType;
         switch (type) {
-            case 'message':
+            case 'Message':
                 return <MessageEdit target={event} onCancel={onCancel} onSubmit={onSubmit} />
-            case 'changeInput':
+            case 'InputChange':
                 break;
         }
         return null;

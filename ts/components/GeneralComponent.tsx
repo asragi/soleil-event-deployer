@@ -57,7 +57,18 @@ export const CenterWindow = (margin: number, zIndex: number) => Styled.div`
 `;
 
 // Primitives
+/** テキストタイトルの表示のデザインを統一するためのコンポーネント */
+export const Title = Styled.div`
+    font-size: 20px;
+`;
+
 /** 画像の大きさを要素の大きさに合わせるコンポーネント */
 export const Image = Styled.img`
     width: 100%;
 `;
+
+export const StyledHr = Styled.hr.attrs(() => ({
+    color: $DAWN_LIGHT_GOLD,
+    width: '100%',
+    size: '1px',
+}))``;

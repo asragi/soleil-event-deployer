@@ -2,8 +2,8 @@
 const eventList = Object.freeze(
     {
         'none': null,
-        'message': null,
-        'changeInput': null,
+        'Message': null,
+        'InputChange': null,
     }
 );
 type EventType = keyof typeof eventList;
